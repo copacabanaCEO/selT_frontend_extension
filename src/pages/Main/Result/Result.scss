@@ -1,0 +1,56 @@
+@import "../../../styles/variables.scss";
+
+.result {
+  height: 60vh;
+  max-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 10px !important;
+
+  .result_button_wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .result_button {
+      background: $main-button-color !important;
+      color: white !important;
+      padding: 10px 0 8px !important;
+      margin: 5px 10px !important;
+      border-radius: 0.7rem !important;
+      font-size: 1.3rem !important;
+      font-family: RixYeoljeongdo_Regular !important;
+      width: 180px;
+    }
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .result {
+    height: 60vh;
+    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    .result_button_wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      .result_button {
+        background: $main-button-color !important;
+        color: white !important;
+        padding: 10px 0 8px !important;
+        margin: 5px 10px !important;
+        border-radius: 0.7rem !important;
+        font-size: 1.3rem !important;
+        font-family: RixYeoljeongdo_Regular !important;
+        width: 180px;
+      }
+    }
+  }
+}

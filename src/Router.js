@@ -1,13 +1,8 @@
-// @ts-ignore
-
-import "./App.css";
-import "./index.css";
 import React from "react";
-
-import Shared from "./pages/Shared";
+import Shared from "./components/Shared/Shared";
 import { Routes, Route } from "react-router-dom";
-import Main from "./pages/Main";
-function App() {
+import Main from "./pages/Main/Main";
+function Router() {
   return (
     <Routes>
       <Route
@@ -19,4 +14,4 @@ function App() {
   );
 }
 
-export default App;
+export default Router;

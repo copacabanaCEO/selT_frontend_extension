@@ -1,7 +1,7 @@
-import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
 import Button from "@mui/material/Button";
-import guage from "../image/guage.png";
-import thumbnail from "../image/thumbnail.png";
+import ResultInfo from "../../../components/Result-info/Result_info";
+import "./Result.scss";
 
 interface Props {
   setShowResult: Dispatch<SetStateAction<boolean>>;
@@ -9,16 +9,10 @@ interface Props {
   name: string;
 }
 function Result({ setShowResult, result, name }: Props) {
-  const [resultPercentage, setResultPercentage] = useState<number>(0);
-  setTimeout(function () {
-    setResultPercentage(result.college_percentage);
-  }, 1000);
-  useEffect(() => {
-    shareKakao();
-  }, []);
+  const { college_percentage, feedback } = result;
 
-  const shareKakao = () => {
-    let link = `https://www.copacabana.co.kr/shared/${name}/${result.college_percentage}/${result.feedback}`;
+  const share_kakao = () => {
+    let link = `https://www.copacabana.co.kr/shared/${name}/${college_percentage}/${feedback}`;
 
     window.Kakao.Link.createDefaultButton({
       container: "#kakao-link-btn",
@@ -50,27 +44,27 @@ function Result({ setShowResult, result, name }: Props) {
     });
   };
 
+  useEffect(() => {
+    share_kakao();
+  }, []);
+
   return (
     <div className="result">
-      <div className="indicator">
-        <img src={guage} />
-
-        <div
-          id="needle1"
-          style={{
-            rotate: `${((resultPercentage - 50) * 9) / 5}deg`,
-            transitionDuration: "1.5s",
-          }}
-        />
-      </div>
-      <div className="result-text">
-        <span>{name}님의 합격가능성은</span>
-        <span>{resultPercentage.toFixed(2)}% 입니다</span>
-        <span>{result.feedback}</span>
-      </div>
-      <div>
-        <Button onClick={() => setShowResult(false)}> 다시하기 </Button>
-        <Button onClick={shareKakao} id="kakao-link-btn">
+      <ResultInfo
+        name={name}
+        college_percentage={Number(college_percentage)}
+        feedback={feedback}
+      />
+      <div className="result_button_wrap">
+        <Button className="result_button" onClick={() => setShowResult(false)}>
+          {" "}
+          다시하기{" "}
+        </Button>
+        <Button
+          id="kakao-link-btn"
+          className="result_button"
+          onClick={share_kakao}
+        >
           공유하기{" "}
           <img
             id="kakao-link-btn"

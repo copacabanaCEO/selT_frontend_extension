@@ -8,8 +8,11 @@ import React, {
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Autocomplete from "@mui/material/Autocomplete";
+import Loading from "../../../components/Loading/Loading";
+import "../../../styles/variables.scss";
+import "./Form.scss";
 
-interface Props {
+interface form_props {
   setShowResult: Dispatch<SetStateAction<boolean>>;
   setResult: Dispatch<
     SetStateAction<{
@@ -19,7 +22,8 @@ interface Props {
   >;
   setName: Dispatch<SetStateAction<string>>;
 }
-function Form({ setShowResult, setResult, setName }: Props) {
+
+function Form({ setShowResult, setResult, setName }: form_props) {
   const [isMale, setIsMale] = useState(true);
   const [isJonghap, setIsJonghap] = useState(true);
   const [location, setLocation] = useState("");
@@ -27,14 +31,42 @@ function Form({ setShowResult, setResult, setName }: Props) {
   const [highSchoolList, setHighSchoolList] = useState([]);
   const [majorList, setMajorList] = useState([]);
   const [locationList, setLocationList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [resize, setResize] = useState(0);
 
   const url = "https://cors-everywhere-me.herokuapp.com/http://52.78.211.155";
+  const main_button_color = `linear-gradient(
+    -90deg,
+    rgba(86, 157, 189) 0%,
+    rgba(108, 55, 107) 30%,
+    rgba(108, 55, 107) 50%,
+    rgba(205, 87, 156) 100%
+  )`;
+  const accent_color = `rgb(88, 215, 231)`;
 
   useEffect(() => {
-    loadUni();
+    load_uni();
   }, []);
 
-  function loadUni() {
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setResize(window.innerWidth);
+    });
+
+    const time = setTimeout(() => {
+      setResize(window.innerWidth);
+    }, 0.0000000000000000001);
+
+    return () => {
+      window.removeEventListener("resize", () => {
+        setResize(window.innerWidth);
+      });
+
+      clearTimeout(time);
+    };
+  }, []);
+
+  const load_uni = () => {
     fetch(`${url}/selT/college`)
       .then((response) => response.json())
       .then((data) => {
@@ -60,9 +92,9 @@ function Form({ setShowResult, setResult, setName }: Props) {
         );
       })
       .catch((err) => console.log("error! :" + err));
-  }
+  };
 
-  function loadMajor(uni: any) {
+  const load_major = (uni: any) => {
     fetch(`${url}/selT/college?college=${uni}`)
       .then((response) => response.json())
       .then((data) => {
@@ -73,8 +105,8 @@ function Form({ setShowResult, setResult, setName }: Props) {
         );
       })
       .catch((err) => console.log("error! :" + err));
-  }
-  function loadLocation(uni: any) {
+  };
+  const load_location = (uni: any) => {
     fetch(`${url}/selT/highschool?name=${uni}`)
       .then((response) => response.json())
       .then((data) => {
@@ -87,14 +119,14 @@ function Form({ setShowResult, setResult, setName }: Props) {
         );
       })
       .catch((err) => console.log("error! :" + err));
-  }
+  };
 
   interface infoI {
     name: string;
     email: string;
     is_male: boolean;
     admission_type: string;
-    avg_gpa: number; //소수점 확인
+    avg_gpa: number;
     college: {
       college: string;
       major: string;
@@ -105,30 +137,21 @@ function Form({ setShowResult, setResult, setName }: Props) {
     };
   }
 
-  function submitForm(e: FormEvent<HTMLFormElement>) {
+  const submit_form = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const {
-      avg_gpa,
-      name,
-      email,
-      // sex,
-      admission_type,
-      college,
-      major,
-      highschoolName,
-      location,
-    } = e.target as typeof e.target & {
-      name: { value: string };
-      email: { value: string };
-      admission_type: { value: string };
-      avg_gpa: { value: number };
+    const { avg_gpa, name, email, college, major, highschoolName, location } =
+      e.target as typeof e.target & {
+        name: { value: string };
+        email: { value: string };
+        admission_type: { value: string };
+        avg_gpa: { value: number };
 
-      college: { value: string };
-      major: { value: string };
+        college: { value: string };
+        major: { value: string };
 
-      highschoolName: { value: string };
-      location: { value: string };
-    };
+        highschoolName: { value: string };
+        location: { value: string };
+      };
 
     let data: infoI = {
       name: name.value,
@@ -146,7 +169,7 @@ function Form({ setShowResult, setResult, setName }: Props) {
       },
     };
 
-    const requestOptions: any = {
+    const request_options: any = {
       method: "POST",
       mode: "cors",
       headers: {
@@ -155,15 +178,14 @@ function Form({ setShowResult, setResult, setName }: Props) {
       body: JSON.stringify(data),
     };
 
-    fetch(`${url}/selT/college-prediction`, requestOptions)
+    fetch(`${url}/selT/college-prediction`, request_options)
       .then((response) => response.json())
       .then((data) => {
         setResult(data);
-
         setShowResult(true);
       })
       .catch((err) => console.log("error! :" + err));
-  }
+  };
 
   const style = {
     "& label.Mui-focused": {
@@ -171,19 +193,27 @@ function Form({ setShowResult, setResult, setName }: Props) {
     },
     "& .MuiOutlinedInput-root": {
       "&.Mui-focused fieldset": {
-        borderColor: "var(--accent-color)",
+        borderColor: accent_color,
       },
     },
   };
+
   return (
-    <div>
-      <form onSubmit={submitForm}>
-        <div>
-          <div className="nameAndSex">
+    <div className="form">
+      <form
+        className="form_wrap"
+        onSubmit={(e) => {
+          submit_form(e);
+          setIsLoading(true);
+        }}
+      >
+        <div className="input_wrap">
+          <div className="name_and_sex">
             <TextField
-              name="name"
+              className="name"
+              id="name"
               label="이름"
-              id="nameForm"
+              autoComplete="on"
               required
               onChange={(e) => {
                 setName(e.target.value);
@@ -193,41 +223,34 @@ function Form({ setShowResult, setResult, setName }: Props) {
                 if (e.key === "Enter") e.preventDefault();
               }}
             />
-            <div className="sex">
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsMale(true);
-                }}
+            <button
+              className="sex"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsMale((prev) => !prev);
+              }}
+              style={{
+                background: main_button_color,
+              }}
+            >
+              <div
+                className="sex_toggle"
                 style={{
-                  background: isMale
-                    ? "var(--main-outerBg-color)"
-                    : "transparent",
-
-                  transitionDuration: "1s",
+                  transform: `translateX(${
+                    resize > 750 ? (isMale ? -18 : 18) : isMale ? -9 : 9
+                  }px)`,
+                  transitionDuration: "0.3s",
                 }}
               >
-                남
-              </button>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsMale(false);
-                }}
-                style={{
-                  background: isMale
-                    ? "transparent"
-                    : "var(--main-outerBg-color)",
-                  transitionDuration: "0.2s",
-                }}
-              >
-                여
-              </button>
-            </div>
+                {isMale ? "남" : "여"}
+              </div>
+            </button>
           </div>
           <TextField
+            className="email"
             id="email"
             label="E-mail"
+            autoComplete="on"
             type="email"
             required
             sx={style}
@@ -236,38 +259,33 @@ function Form({ setShowResult, setResult, setName }: Props) {
             }}
           />
         </div>
-        <div>
-          <div id="admission_type">
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setIsJonghap(true);
-              }}
+        <div className="input_wrap">
+          <button
+            className="admission_type"
+            onClick={(e) => {
+              e.preventDefault();
+              setIsJonghap((prev) => !prev);
+            }}
+            style={{
+              background: main_button_color,
+            }}
+          >
+            <div
+              className="admission_toggle"
               style={{
-                background: isJonghap
-                  ? "var(--main-outerBg-color)"
-                  : "transparent",
+                transform: `translateX(${
+                  resize > 750 ? (isJonghap ? -87 : 87) : isJonghap ? -62 : 62
+                }px)`,
+                transitionDuration: "0.3s",
               }}
             >
-              종합
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setIsJonghap(false);
-              }}
-              style={{
-                background: isJonghap
-                  ? "transparent"
-                  : "var(--main-outerBg-color)",
-              }}
-            >
-              교과
-            </button>
-          </div>
+              {isJonghap ? "종합" : "교과"}
+            </div>
+          </button>
           <TextField
             label="내신점수"
-            id="avgGpaForm"
+            autoComplete="on"
+            className="avg_gpa"
             inputProps={{
               pattern: "[0-9]*.[0-9]*",
             }}
@@ -279,9 +297,10 @@ function Form({ setShowResult, setResult, setName }: Props) {
             }}
           />
         </div>
-        <div>
+        <div className="input_wrap">
           <Autocomplete
             disablePortal
+            className="highschoolName"
             id="highschoolName"
             sx={{ ...style, width: 300 }}
             options={highSchoolList}
@@ -289,7 +308,7 @@ function Form({ setShowResult, setResult, setName }: Props) {
               <TextField {...params} label="학교명" required />
             )}
             onChange={(e, value: string | null) => {
-              loadLocation(value);
+              load_location(value);
             }}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
@@ -299,6 +318,7 @@ function Form({ setShowResult, setResult, setName }: Props) {
           />
           <Autocomplete
             disablePortal
+            className="location"
             id="location"
             sx={{ ...style, width: 300 }}
             options={locationList}
@@ -311,15 +331,16 @@ function Form({ setShowResult, setResult, setName }: Props) {
                 e.preventDefault();
               }
             }}
-            value={locationList.length == 1 ? locationList[0] : location}
+            value={locationList.length === 1 ? locationList[0] : location}
             renderInput={(params) => (
               <TextField {...params} label="지역" required />
             )}
           />
         </div>
-        <div>
+        <div className="input_wrap">
           <Autocomplete
             disablePortal
+            className="college"
             id="college"
             options={uniList}
             sx={{ ...style, width: 300 }}
@@ -327,7 +348,7 @@ function Form({ setShowResult, setResult, setName }: Props) {
               <TextField {...params} label="희망대학" required />
             )}
             onChange={(e, value: string | null) => {
-              loadMajor(value);
+              load_major(value);
             }}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
@@ -338,6 +359,7 @@ function Form({ setShowResult, setResult, setName }: Props) {
 
           <Autocomplete
             disablePortal
+            className="major"
             id="major"
             options={majorList}
             sx={{ ...style, width: 300 }}
@@ -351,8 +373,11 @@ function Form({ setShowResult, setResult, setName }: Props) {
             }}
           />
         </div>
-        <Button type="submit">Submit</Button>
+        <Button className="submit_button" type="submit">
+          Submit
+        </Button>
       </form>
+      {isLoading && <Loading />}
     </div>
   );
 }

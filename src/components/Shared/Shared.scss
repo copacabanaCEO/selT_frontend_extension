@@ -1,0 +1,123 @@
+@import "../../styles/variables.scss";
+
+.shared {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: $black-color;
+  background: $main-outer-background-color;
+  overflow: hidden;
+
+  .outer {
+    margin: auto;
+    top: 5vh;
+    width: 90vw;
+    height: 90vh;
+    max-width: 1100px;
+    max-height: 700px;
+
+    .inner {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      margin: auto;
+      height: 100%;
+      background: url("../../image/laptop-backgorund.png");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+
+      .header {
+        margin: 0 auto;
+        width: 600px;
+        text-align: left;
+
+        .header_h1 {
+          margin: 30px 0 0 0;
+          height: 55px;
+          color: $accent-color;
+          font-family: GangwonEduPowerExtraBoldA;
+          font-size: 3rem;
+          line-height: 4.2rem;
+        }
+
+        .header_span {
+          font-size: 1.2rem;
+          font-family: RixYeoljeongdo_Regular;
+        }
+      }
+
+      .result {
+        height: 60vh;
+        max-height: 500px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        margin: 5px 10px !important;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .shared {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: $black-color;
+    background: $main-outer-background-color;
+
+    .outer {
+      margin: auto;
+      top: 5vh;
+      width: 90vw;
+      height: 90vh;
+      max-width: 1100px;
+      max-height: 700px;
+
+      .inner {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        margin: auto;
+        padding: 2%;
+        width: 80vw;
+        height: 86vh;
+        max-width: 320px;
+        background: url("../../image/mobile-background.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+
+        .header {
+          margin: 0 auto;
+          width: 300px;
+          text-align: center;
+
+          .header_h1 {
+            margin-top: 0;
+            height: 55px;
+            color: $accent-color;
+            font-family: GangwonEduPowerExtraBoldA;
+            font-size: 2.5rem;
+            line-height: 4.85rem;
+          }
+
+          .header_span {
+            margin-top: 0.3rem;
+            font-size: 1rem;
+            font-family: RixYeoljeongdo_Regular;
+          }
+        }
+
+        .result {
+          height: 60vh;
+          max-height: 500px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: center;
+        }
+      }
+    }
+  }
+}
