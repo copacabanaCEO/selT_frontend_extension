@@ -8,6 +8,7 @@ import React, {
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Autocomplete from "@mui/material/Autocomplete";
+import Loading from "./Loading";
 
 interface Props {
   setShowResult: Dispatch<SetStateAction<boolean>>;
@@ -27,6 +28,7 @@ function Form({ setShowResult, setResult, setName }: Props) {
   const [highSchoolList, setHighSchoolList] = useState([]);
   const [majorList, setMajorList] = useState([]);
   const [locationList, setLocationList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const url = "https://cors-everywhere-me.herokuapp.com/http://52.78.211.155";
 
@@ -177,7 +179,12 @@ function Form({ setShowResult, setResult, setName }: Props) {
   };
   return (
     <div>
-      <form onSubmit={submitForm}>
+      <form
+        onSubmit={(e) => {
+          submitForm(e);
+          setIsLoading(true);
+        }}
+      >
         <div>
           <div className="nameAndSex">
             <TextField
@@ -311,7 +318,7 @@ function Form({ setShowResult, setResult, setName }: Props) {
                 e.preventDefault();
               }
             }}
-            value={locationList.length == 1 ? locationList[0] : location}
+            value={locationList.length === 1 ? locationList[0] : location}
             renderInput={(params) => (
               <TextField {...params} label="지역" required />
             )}
@@ -353,6 +360,7 @@ function Form({ setShowResult, setResult, setName }: Props) {
         </div>
         <Button type="submit">Submit</Button>
       </form>
+      {isLoading && <Loading />}
     </div>
   );
 }
