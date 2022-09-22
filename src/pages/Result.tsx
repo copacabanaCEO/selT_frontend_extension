@@ -68,7 +68,7 @@ function Result({ setShowResult, result, name }: Props) {
         <span>{resultPercentage.toFixed(2)}% 입니다</span>
         <span>{result.feedback}</span>
       </div>
-      <div>
+      <div className="result-button">
         <Button onClick={() => setShowResult(false)}> 다시하기 </Button>
         <Button onClick={shareKakao} id="kakao-link-btn">
           공유하기{" "}

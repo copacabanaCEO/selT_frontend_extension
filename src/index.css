@@ -15,8 +15,16 @@
     rgba(108, 55, 107) 50%,
     rgba(86, 157, 189) 100%
   );
+  --main-button-reverse-color: linear-gradient(
+    -90deg,
+    rgba(86, 157, 189) 0%,
+    rgba(108, 55, 107) 30%,
+    rgba(108, 55, 107) 50%,
+    rgba(205, 87, 156) 100%
+  );
   --accent-color: rgb(88, 215, 231);
   --secondary-color: rgb(255, 87, 171);
+  --sexJonghab-color: rgb(237, 81, 159);
   --black-color: rgb(34, 34, 34);
 }
 @font-face {
@@ -127,9 +135,7 @@ h1 {
 .MuiFormControl-root input {
   color: white;
 }
-.MuiFormControl-root fieldset,
-.sex,
-#admission_type {
+.MuiFormControl-root fieldset {
   border-color: var(--secondary-color);
   border-radius: 0.7rem;
   border-width: 1px;
@@ -182,53 +188,58 @@ form > button,
   column-gap: 20px;
 }
 
+/* sex */
 .sex {
-  border: 1px solid var(--secondary-color);
   display: flex;
-  justify-content: space-around;
-  /* background: var(--main-outerBg-color); */
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--sexJonghab-color);
+  border-radius: 1.65rem;
+  transition: all 1s;
 }
-.sex > button {
-  width: 50%;
-  height: 100%;
-  border-width: 0px;
-  color: var(--main-font-color);
-  font-weight: 400;
-  background: transparent;
-  cursor: pointer;
-  font-weight: 400;
-  font-size: 1rem;
-  line-height: 1.4375em;
-  letter-spacing: 0.00938em;
+
+.sexToggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.448);
+  border: 2px solid var(--sexJonghab-color);
+  border-radius: 20px;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
 }
-.sex > button:nth-child(1),
-#admission_type button:nth-child(1) {
-  border-radius: 0.7rem 0 0 0.7rem;
+
+/* admission_type */
+#admission_type {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  border: 1px solid var(--sexJonghab-color);
+  border-radius: 28px;
 }
-.sex > button:nth-child(2),
-#admission_type button:nth-child(2) {
-  border-radius: 0 0.7rem 0.7rem 0;
+
+.admission_toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.448);
+  border-radius: 20px;
+  border: 2px solid var(--sexJonghab-color);
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
 }
+
 #avgGpaForm,
 #email {
   width: 270px;
   /* padding: 9px; */
-}
-#admission_type {
-  border: 1px solid var(--secondary-color);
-  width: 300px;
-}
-#admission_type button {
-  color: var(--main-font-color);
-  border: none;
-  width: 50%;
-  height: 100%;
-  padding: 16.5px 14px;
-  font-weight: 400;
-  font-size: 1rem;
-  line-height: 1.4375em;
-  letter-spacing: 0.00938em;
-  cursor: pointer;
 }
 
 /* Result */
@@ -238,6 +249,7 @@ form > button,
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
 }
 
 .indicator {
@@ -320,6 +332,7 @@ form > button,
   form > div {
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
   form > div > div {
     margin: 15px auto !important;
@@ -335,6 +348,7 @@ form > button,
   .nameAndSex {
     width: 250px;
   }
+
   #avgGpaForm,
   #email {
     width: 222px;
@@ -363,5 +377,10 @@ form > button,
 
   .result-text {
     font-size: 1rem;
+  }
+  .result-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }

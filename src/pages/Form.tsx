@@ -193,37 +193,30 @@ function Form({ setShowResult, setResult, setName }: Props) {
                 if (e.key === "Enter") e.preventDefault();
               }}
             />
-            <div className="sex">
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsMale(true);
-                }}
+            <button
+              className="sex"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsMale((prev) => !prev);
+              }}
+              style={{
+                background: `${
+                  isMale
+                    ? "var(--main-button-color)"
+                    : "var(--main-button-reverse-color)"
+                }`,
+              }}
+            >
+              <div
+                className="sexToggle"
                 style={{
-                  background: isMale
-                    ? "var(--main-outerBg-color)"
-                    : "transparent",
-
-                  transitionDuration: "1s",
+                  transform: `translateX(${isMale ? -30 : 30}%)`,
+                  transitionDuration: "0.3s",
                 }}
               >
-                남
-              </button>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsMale(false);
-                }}
-                style={{
-                  background: isMale
-                    ? "transparent"
-                    : "var(--main-outerBg-color)",
-                  transitionDuration: "0.2s",
-                }}
-              >
-                여
-              </button>
-            </div>
+                {isMale ? "남" : "여"}
+              </div>
+            </button>
           </div>
           <TextField
             id="email"
@@ -237,34 +230,30 @@ function Form({ setShowResult, setResult, setName }: Props) {
           />
         </div>
         <div>
-          <div id="admission_type">
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setIsJonghap(true);
-              }}
+          <button
+            id="admission_type"
+            onClick={(e) => {
+              e.preventDefault();
+              setIsJonghap((prev) => !prev);
+            }}
+            style={{
+              background: `${
+                isJonghap
+                  ? "var(--main-button-color)"
+                  : "var(--main-button-reverse-color)"
+              }`,
+            }}
+          >
+            <div
+              className="admission_toggle"
               style={{
-                background: isJonghap
-                  ? "var(--main-outerBg-color)"
-                  : "transparent",
+                transform: `translateX(${isJonghap ? -50 : 50}%)`,
+                transitionDuration: "0.3s",
               }}
             >
-              종합
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setIsJonghap(false);
-              }}
-              style={{
-                background: isJonghap
-                  ? "transparent"
-                  : "var(--main-outerBg-color)",
-              }}
-            >
-              교과
-            </button>
-          </div>
+              {isJonghap ? "종합" : "교과"}
+            </div>
+          </button>
           <TextField
             label="내신점수"
             id="avgGpaForm"
@@ -311,7 +300,7 @@ function Form({ setShowResult, setResult, setName }: Props) {
                 e.preventDefault();
               }
             }}
-            value={locationList.length == 1 ? locationList[0] : location}
+            value={locationList.length === 1 ? locationList[0] : location}
             renderInput={(params) => (
               <TextField {...params} label="지역" required />
             )}

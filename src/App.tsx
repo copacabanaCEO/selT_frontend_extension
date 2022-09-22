@@ -1,6 +1,5 @@
 // @ts-ignore
 
-import "./App.css";
 import "./index.css";
 import React from "react";
 
