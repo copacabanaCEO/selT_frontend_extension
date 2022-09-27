@@ -1,7 +1,5 @@
-@import "../../../styles/variables.scss";
-
 .form {
-  .form_wrap {
+  .formWrap {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -13,98 +11,37 @@
     max-width: 800px;
     max-height: 450px;
 
-    .input_wrap {
+    .inputWrap {
       display: flex;
+      flex-direction: column;
       justify-content: space-around;
+      align-items: center;
+      margin-top: 30px;
 
-      .name_and_sex {
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        column-gap: 21px;
+      .avgGpa {
         width: 300px;
-
-        .sex {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 3.5rem;
-          border: 2px solid $sex-jonghab-color;
-          border-radius: 1.75rem;
-
-          .sex_toggle {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 3.1rem;
-            height: 3.1rem;
-            background-color: rgba(255, 255, 255, 0.5);
-            border: 2px solid $sex-jonghab-color;
-            border-radius: 1.55rem;
-            color: white;
-            font-size: 2rem;
-            font-weight: bold;
-          }
-        }
+        margin-top: 15px;
       }
 
-      .email {
-        width: 300px;
-      }
-    }
-
-    .input_wrap {
-      display: flex;
-      justify-content: space-around;
-
-      .admission_type {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 300px;
-        height: 3.5rem;
-        border: 2px solid $sex-jonghab-color;
-        border-radius: 1.75rem;
-
-        .admission_toggle {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 120px;
-          height: 3.1rem;
-          background-color: rgba(255, 255, 255, 0.5);
-          border-radius: 1.55rem;
-          border: 2px solid $sex-jonghab-color;
-          color: white;
-          font-size: 2rem;
-          font-weight: bold;
-        }
+      .college {
+        margin-top: 15px;
       }
 
-      .avg_gpa {
-        width: 300px;
+      .major {
+        margin-top: 15px;
       }
-    }
-
-    .input_wrap {
-      display: flex;
-      justify-content: space-around;
-    }
-
-    .input_wrap {
-      display: flex;
-      justify-content: space-around;
     }
   }
 
   /* SUBMIT button */
   .css-1e6y48t-MuiButtonBase-root-MuiButton-root,
-  .submit_button {
+  .submitButton {
     padding: 10px 88px 8px !important;
     font-size: 1rem !important;
-    background: $main-button-color !important;
+    background: green !important;
     color: white !important;
     padding: 10px 0 8px !important;
-    margin: 5px auto !important;
+    margin: 30px auto !important;
     border-radius: 0.7rem !important;
     font-size: 1.3rem !important;
     font-family: RixYeoljeongdo_Regular !important;
@@ -120,10 +57,10 @@
     }
 
     ::-webkit-scrollbar-thumb {
-      background-color: $accent-color;
+      background-color: green;
     }
 
-    .form_wrap {
+    .formWrap {
       position: relative;
       display: flex;
       flex-direction: column;
@@ -135,43 +72,13 @@
       justify-content: space-between;
       overflow-y: scroll;
 
-      .input_wrap {
+      .inputWrap {
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
         align-items: center;
+        justify-content: space-around;
 
-        .name_and_sex {
-          display: grid;
-          grid-template-columns: 2fr 1fr;
-          column-gap: 22px;
-          margin: 15px auto !important;
-          width: 250px;
-
-          .sex {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 2px solid $sex_jonghab_color;
-            border-radius: 1.75rem;
-
-            .sex_toggle {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              width: 50px;
-              height: 50px;
-              background-color: rgba(255, 255, 255, 0.448);
-              border: 2px solid $sex_jonghab_color;
-              border-radius: 25px;
-              color: white;
-              font-size: 2rem;
-              font-weight: bold;
-            }
-          }
-        }
-
-        .email {
+        .avgGpa {
           display: inline-flex;
           flex-direction: column;
           margin: 15px auto !important;
@@ -179,67 +86,7 @@
         }
       }
 
-      .input_wrap {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
-
-        .admission_type {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin: 15px auto !important;
-          width: 250px;
-          height: 3.5rem;
-          border: 2px solid $sex_jonghab_color;
-          border-radius: 28px;
-
-          .admission_toggle {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 120px;
-            height: 3.1rem;
-            background-color: rgba(255, 255, 255, 0.448);
-            border-radius: 1.55rem;
-            border: 2px solid $sex_jonghab_color;
-            color: white;
-            font-size: 2rem;
-            font-weight: bold;
-          }
-        }
-
-        .avg_gpa {
-          display: inline-flex;
-          flex-direction: column;
-          margin: 15px auto !important;
-          width: 250px;
-        }
-      }
-
-      .input_wrap {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-
-        .highschoolName {
-          display: inline-flex;
-          flex-direction: column;
-          margin: 15px auto !important;
-          width: 250px;
-        }
-
-        .location {
-          display: inline-flex;
-          flex-direction: column;
-          margin: 15px auto !important;
-          width: 250px;
-        }
-      }
-
-      .input_wrap {
+      .inputWrap {
         .college {
           display: inline-flex;
           flex-direction: column;
@@ -257,11 +104,11 @@
     }
 
     .css-1e6y48t-MuiButtonBase-root-MuiButton-root,
-    .submit_button {
+    .submitButton {
       margin: 5px auto !important;
       padding: 10px 88px 8px !important;
       width: 180px;
-      background: $main_button_color !important;
+      background: green !important;
       border-radius: 0.7rem !important;
       color: white !important;
       font-size: 1rem !important;
@@ -271,20 +118,20 @@
 
 /* mui */
 .MuiFormControl-root label {
-  color: white !important;
+  color: black !important;
   font-weight: 100 !important;
 }
 
 .MuiFormControl-root input {
-  color: white;
+  color: black;
 }
 
 .MuiFormControl-root fieldset {
-  border-color: $secondary-color;
+  border-color: green;
   border-radius: 0.7rem;
   border-width: 1px;
 }
 
 .MuiFormControl-root svg {
-  fill: $main-font-color;
+  fill: lightgreen;
 }

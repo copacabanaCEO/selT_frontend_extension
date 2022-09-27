@@ -1,18 +1,18 @@
 import React, { Dispatch, SetStateAction, useEffect } from "react";
 import Button from "@mui/material/Button";
-import ResultInfo from "../../../components/Result-info/Result_info";
+import ResultInfo from "../../../components/ResultInfo/ResultInfo";
 import "./Result.scss";
 
 interface Props {
   setShowResult: Dispatch<SetStateAction<boolean>>;
-  result: { college_percentage: number; feedback: string };
+  result: { collegePercentage: number; feedback: string };
   name: string;
 }
 function Result({ setShowResult, result, name }: Props) {
-  const { college_percentage, feedback } = result;
+  const { collegePercentage, feedback } = result;
 
-  const share_kakao = () => {
-    let link = `https://www.copacabana.co.kr/shared/${name}/${college_percentage}/${feedback}`;
+  const shareKakao = () => {
+    let link = `https://www.copacabana.co.kr/shared/${name}/${collegePercentage}/${feedback}`;
 
     window.Kakao.Link.createDefaultButton({
       container: "#kakao-link-btn",
@@ -45,25 +45,25 @@ function Result({ setShowResult, result, name }: Props) {
   };
 
   useEffect(() => {
-    share_kakao();
+    shareKakao();
   }, []);
 
   return (
     <div className="result">
       <ResultInfo
         name={name}
-        college_percentage={Number(college_percentage)}
+        collegePercentage={Number(collegePercentage)}
         feedback={feedback}
       />
-      <div className="result_button_wrap">
-        <Button className="result_button" onClick={() => setShowResult(false)}>
+      <div className="resultButtonWrap">
+        <Button className="resultButton" onClick={() => setShowResult(false)}>
           {" "}
           다시하기{" "}
         </Button>
         <Button
           id="kakao-link-btn"
-          className="result_button"
-          onClick={share_kakao}
+          className="resultButton"
+          onClick={shareKakao}
         >
           공유하기{" "}
           <img

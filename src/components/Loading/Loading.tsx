@@ -5,7 +5,7 @@ import "./Loading.scss";
 function Loading() {
   return (
     <div className="loading">
-      <img className="loading_image" src={LoadingImg} alt="Loading" />
+      <img className="loadingImage" src={LoadingImg} alt="Loading" />
     </div>
   );
 }
