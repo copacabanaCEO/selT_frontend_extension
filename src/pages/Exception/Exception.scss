@@ -1,0 +1,45 @@
+.exception {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  .goToMain {
+    width: 200px;
+    height: 60px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    background-color: #28b39b;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    margin-top: 3rem;
+    box-shadow: 0 0 0.3rem 0.1rem #cccccc;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .exception {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    img {
+      width: 330px;
+    }
+    .goToMain {
+      width: 150px;
+      height: 40px;
+      font-size: 1rem;
+      font-weight: 600;
+      background-color: #28b39b;
+      color: white;
+      border: none;
+      border-radius: 0.6rem;
+      margin-top: 2.5rem;
+      box-shadow: 0 0 0.2rem 0.07rem #cccccc;
+    }
+  }
+}
