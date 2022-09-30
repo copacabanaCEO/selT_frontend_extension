@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import guage from "../../image/guage.png";
-import "./Result_info.scss";
+import "./ResultInfo.scss";
 
 interface Props {
   name: string;
-  college_percentage: number;
+  collegePercentage: number;
   feedback: string;
 }
 
-function ResultInfo({ name, college_percentage, feedback }: Props) {
+function ResultInfo({ name, collegePercentage, feedback }: Props) {
   const [resultPercentage, setResultPercentage] = useState<number>(0);
   setTimeout(function () {
-    college_percentage && setResultPercentage(college_percentage);
+    collegePercentage && setResultPercentage(collegePercentage);
   }, 1000);
 
   return (
     <>
       <div className="indicator">
-        <img src={guage} alt="college_percentage" />
+        <img src={guage} alt="collegePercentage" />
         <div
           className="needle"
           style={{
@@ -26,7 +26,7 @@ function ResultInfo({ name, college_percentage, feedback }: Props) {
           }}
         />
       </div>
-      <div className="result_text">
+      <div className="resultText">
         <span>{name}님의 합격가능성은</span>
         <span>{resultPercentage.toFixed(2)}% 입니다</span>
         <span>{feedback}</span>

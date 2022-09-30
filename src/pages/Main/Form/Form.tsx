@@ -9,11 +9,11 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Autocomplete from "@mui/material/Autocomplete";
 import Loading from "../../../components/Loading/Loading";
-import "../../../styles/variables.scss";
+import SubjectToggle from "../../../components/Forms/SubjectToggle";
 import "./Form.scss";
 import { useNavigate } from "react-router-dom";
 
-interface form_props {
+interface Props {
   setShowResult: Dispatch<SetStateAction<boolean>>;
   setResult: Dispatch<
     SetStateAction<{
@@ -25,154 +25,127 @@ interface form_props {
   setName: Dispatch<SetStateAction<string>>;
 }
 
-function Form({ setShowResult, setResult, setName }: form_props) {
-  const [isMale, setIsMale] = useState(true);
-  const [isJonghap, setIsJonghap] = useState(true);
-  const [location, setLocation] = useState("");
+interface CollegeObject {
+  admissionType: string;
+  avgGpa: number;
+  campus: string;
+  college: string;
+  id: number;
+  major: string;
+  maxGpa: number;
+  medGpa: number;
+  minGpa: number;
+  stdevGpa: number;
+  year: number;
+}
+
+interface MajorObject {
+  admissionType: string;
+  avgGpa: number;
+  campus: string;
+  college: string;
+  id: number;
+  major: string;
+  maxGpa: number;
+  medGpa: number;
+  minGpa: number;
+  stdevGpa: number;
+  year: number;
+}
+
+type uniList = string[];
+type majorList = string[];
+
+function Form({ setShowResult, setResult }: Props) {
+  const [isSubject, setIsSubject] = useState(true);
   const [uniList, setUniList] = useState([]);
-  const [highSchoolList, setHighSchoolList] = useState([]);
   const [majorList, setMajorList] = useState([]);
-  const [locationList, setLocationList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [resize, setResize] = useState(0);
   const navigate = useNavigate();
 
   const url = "http://43.201.70.179:8000";
-  const main_button_color = `linear-gradient(
-    -90deg,
-    rgba(86, 157, 189) 0%,
-    rgba(108, 55, 107) 30%,
-    rgba(108, 55, 107) 50%,
-    rgba(205, 87, 156) 100%
-  )`;
-  const accent_color = `rgb(88, 215, 231)`;
+  const accentColor = `lightgreen`;
 
   useEffect(() => {
-    load_uni();
+    loadUniversityList();
+    loadMajor();
   }, []);
 
-  useEffect(() => {
-    window.addEventListener("resize", () => {
-      setResize(window.innerWidth);
-    });
+  async function loadUniversityList() {
+    try {
+      const res = await fetch(`${url}/selT/college`);
+      const data = await res.json();
+      const test = data.reduce((acc: uniList, cur: CollegeObject) => {
+        if (!acc.includes(cur.college)) {
+          return [...acc, cur.college];
+        }
+        return acc;
+      }, []);
+      setUniList(test);
+    } catch (e) {
+      console.log("error! :" + e);
+    }
+  }
+  //console.log("uniList", uniList);
 
-    const time = setTimeout(() => {
-      setResize(window.innerWidth);
-    }, 0.0000000000000000001);
+  async function loadMajor() {
+    try {
+      const res = await fetch(`${url}/selT/college?college`);
+      const data = await res.json();
+      const test = data.reduce((acc: majorList, cur: MajorObject) => {
+        if (!acc.includes(cur.major)) {
+          return [...acc, cur.major];
+        }
+        return acc;
+      }, []);
+      setMajorList(test);
+    } catch (e) {
+      console.log("error! :" + e);
+    }
+  }
+  //console.log("majorList", majorList);
 
-    return () => {
-      window.removeEventListener("resize", () => {
-        setResize(window.innerWidth);
-      });
-
-      clearTimeout(time);
-    };
-  }, []);
-
-  const load_uni = () => {
-    fetch(`${url}/selT/college`)
-      .then((response) => response.json())
-      .then((data) => {
-        setUniList(
-          data
-            .map((el: any) => el.college)
-            .filter((c: any, index: any) => {
-              return data.map((el: any) => el.college).indexOf(c) === index;
-            })
-        );
-      })
-      .catch((err) => console.log("error! :" + err));
-
-    fetch(`${url}/selT/highschool`)
-      .then((response) => response.json())
-      .then((data) => {
-        setHighSchoolList(
-          data
-            .map((el: any) => el.name)
-            .filter((c: any, index: any) => {
-              return data.map((el: any) => el.name).indexOf(c) === index;
-            })
-        );
-      })
-      .catch((err) => console.log("error! :" + err));
-  };
-
-  const load_major = (uni: any) => {
-    fetch(`${url}/selT/college?college=${uni}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setMajorList(
-          data
-            .filter((el: any) => el.college === uni)
-            .map((el: any) => el.major)
-        );
-      })
-      .catch((err) => console.log("error! :" + err));
-  };
-  const load_location = (uni: any) => {
-    fetch(`${url}/selT/highschool?name=${uni}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setLocationList(
-          data
-            .map((el: any) => el.location)
-            .filter((c: any, index: any) => {
-              return data.map((el: any) => el.location).indexOf(c) === index;
-            })
-        );
-      })
-      .catch((err) => console.log("error! :" + err));
-  };
+  // const load_major = (uni: any) => {
+  //   fetch(`${url}/selT/college?college=${uni}`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setMajorList(
+  //         data
+  //           .filter((el: any) => el.college === uni)
+  //           .map((el: any) => el.major)
+  //       );
+  //     })
+  //     .catch((err) => console.log("error! :" + err));
+  // };
 
   interface infoI {
-    name: string;
-    email: string;
-    is_male: boolean;
-    admission_type: string;
-    avg_gpa: number;
+    admissionType: string;
+    avgGpa: number; //소수점 확인
     college: {
       college: string;
       major: string;
     };
-    highschool: {
-      name: string;
-      location: string;
-    };
   }
 
-  const submit_form = (e: FormEvent<HTMLFormElement>) => {
+  function submitForm(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const { avg_gpa, name, email, college, major, highschoolName, location } =
-      e.target as typeof e.target & {
-        name: { value: string };
-        email: { value: string };
-        admission_type: { value: string };
-        avg_gpa: { value: number };
-
-        college: { value: string };
-        major: { value: string };
-
-        highschoolName: { value: string };
-        location: { value: string };
-      };
+    const { avgGpa, college, major } = e.target as typeof e.target & {
+      admissionType: { value: string };
+      avgGpa: { value: number };
+      college: { value: string };
+      major: { value: string };
+    };
 
     let data: infoI = {
-      name: name.value,
-      email: `[${email.value}](mailto:${email.value})`,
-      is_male: isMale,
-      admission_type: isJonghap ? "종합" : "교과",
-      avg_gpa: Number(avg_gpa.value), //소수점 확인
+      admissionType: isSubject ? "교과" : "종합",
+      avgGpa: Number(avgGpa.value), //소수점 확인
       college: {
         college: college.value,
         major: major.value,
       },
-      highschool: {
-        name: highschoolName.value,
-        location: location.value,
-      },
     };
 
-    const request_options: any = {
+    const requestOptions: any = {
       method: "POST",
       mode: "cors",
       headers: {
@@ -181,25 +154,26 @@ function Form({ setShowResult, setResult, setName }: form_props) {
       body: JSON.stringify(data),
     };
 
-    fetch(`${url}/selT/college-prediction`, request_options)
+    fetch(`${url}/selT/college-prediction`, requestOptions)
       .then((response) =>
         response.status >= 400 ? navigate("/exception") : response.json()
       )
       .then((data) => {
         console.log(data);
         setResult(data);
+
         setShowResult(true);
       })
       .catch((err) => console.log("error! :" + err));
-  };
+  }
 
   const style = {
     "& label.Mui-focused": {
-      color: "green",
+      color: "#26A58A",
     },
     "& .MuiOutlinedInput-root": {
       "&.Mui-focused fieldset": {
-        borderColor: accent_color,
+        borderColor: accentColor,
       },
     },
   };
@@ -207,143 +181,28 @@ function Form({ setShowResult, setResult, setName }: form_props) {
   return (
     <div className="form">
       <form
-        className="form_wrap"
         onSubmit={(e) => {
-          submit_form(e);
+          submitForm(e);
           setIsLoading(true);
         }}
+        className="formWrap"
       >
-        <div className="input_wrap">
-          <div className="name_and_sex">
-            <TextField
-              className="name"
-              id="name"
-              label="이름"
-              autoComplete="on"
-              required
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-              sx={style}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") e.preventDefault();
-              }}
-            />
-            <button
-              className="sex"
-              onClick={(e) => {
-                e.preventDefault();
-                setIsMale((prev) => !prev);
-              }}
-              style={{
-                background: main_button_color,
-              }}
-            >
-              <div
-                className="sex_toggle"
-                style={{
-                  transform: `translateX(${
-                    resize > 750 ? (isMale ? -18 : 18) : isMale ? -9 : 9
-                  }px)`,
-                  transitionDuration: "0.3s",
-                }}
-              >
-                {isMale ? "남" : "여"}
-              </div>
-            </button>
-          </div>
+        <div className="inputWrap">
+          <SubjectToggle setIsSubject={setIsSubject} isSubject={isSubject} />
           <TextField
-            className="email"
-            id="email"
-            label="E-mail"
-            autoComplete="on"
-            type="email"
-            required
-            sx={style}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") e.preventDefault();
-            }}
-          />
-        </div>
-        <div className="input_wrap">
-          <button
-            className="admission_type"
-            onClick={(e) => {
-              e.preventDefault();
-              setIsJonghap((prev) => !prev);
-            }}
-            style={{
-              background: main_button_color,
-            }}
-          >
-            <div
-              className="admission_toggle"
-              style={{
-                transform: `translateX(${
-                  resize > 750 ? (isJonghap ? -87 : 87) : isJonghap ? -62 : 62
-                }px)`,
-                transitionDuration: "0.3s",
-              }}
-            >
-              {isJonghap ? "종합" : "교과"}
-            </div>
-          </button>
-          <TextField
+            className="avgGpa"
             label="내신점수"
-            autoComplete="on"
-            className="avg_gpa"
+            id="avgGpaForm"
             inputProps={{
               pattern: "[0-9].*[0-9]*",
             }}
-            name="avg_gpa"
+            name="avgGpa"
             sx={{ ...style, color: "success.main" }}
             required
             onKeyDown={(e) => {
               if (e.key === "Enter") e.preventDefault();
             }}
           />
-        </div>
-        <div className="input_wrap">
-          <Autocomplete
-            disablePortal
-            className="highschoolName"
-            id="highschoolName"
-            sx={{ ...style, width: 300 }}
-            options={highSchoolList}
-            renderInput={(params) => (
-              <TextField {...params} label="학교명" required />
-            )}
-            onChange={(e, value: string | null) => {
-              load_location(value);
-            }}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-              }
-            }}
-          />
-          <Autocomplete
-            disablePortal
-            className="location"
-            id="location"
-            sx={{ ...style, width: 300 }}
-            options={locationList}
-            onChange={(e) => {
-              let target = e.target as HTMLInputElement;
-              setLocation(target.innerHTML);
-            }}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-              }
-            }}
-            value={locationList.length === 1 ? locationList[0] : location}
-            renderInput={(params) => (
-              <TextField {...params} label="지역" required />
-            )}
-          />
-        </div>
-        <div className="input_wrap">
           <Autocomplete
             disablePortal
             className="college"
@@ -354,7 +213,7 @@ function Form({ setShowResult, setResult, setName }: form_props) {
               <TextField {...params} label="희망대학" required />
             )}
             onChange={(e, value: string | null) => {
-              load_major(value);
+              loadMajor();
             }}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
@@ -362,7 +221,6 @@ function Form({ setShowResult, setResult, setName }: form_props) {
               }
             }}
           />
-
           <Autocomplete
             disablePortal
             className="major"
@@ -379,7 +237,7 @@ function Form({ setShowResult, setResult, setName }: form_props) {
             }}
           />
         </div>
-        <Button className="submit_button" type="submit">
+        <Button className="submitButton" type="submit">
           Submit
         </Button>
       </form>

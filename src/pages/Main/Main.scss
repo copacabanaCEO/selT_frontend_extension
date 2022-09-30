@@ -5,7 +5,7 @@
   flex-direction: column;
   height: 100vh;
   background-color: $black-color;
-  background: $main-outer-background-color;
+  background: #fafafa;
   overflow: hidden;
 
   .outer {
@@ -13,8 +13,8 @@
     top: 5vh;
     width: 90vw;
     height: 90vh;
-    max-width: 1100px;
-    max-height: 700px;
+    max-width: 800px;
+    max-height: 600px;
 
     .inner {
       display: flex;
@@ -22,16 +22,16 @@
       justify-content: space-evenly;
       margin: auto;
       height: 100%;
-      background: url("../../image/laptop-backgorund.png");
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
+      background: white;
+      border-radius: 1.75rem;
+      box-shadow: 0 0 0.5rem 0.1rem #e0e0e0;
 
       .header {
         margin: 0 auto;
         width: 600px;
         text-align: left;
 
-        .header_h1 {
+        .headerH1 {
           margin: 30px 0 0 0;
           height: 55px;
           color: $accent-color;
@@ -40,7 +40,7 @@
           line-height: 4.2rem;
         }
 
-        .header_span {
+        .headerSpan {
           font-size: 1.2rem;
           font-family: RixYeoljeongdo_Regular;
         }
@@ -55,35 +55,35 @@
     flex-direction: column;
     height: 100vh;
     background-color: $black-color;
-    background: $main-outer-background-color;
+    background: #fafafa;
 
     .outer {
       margin: auto;
       top: 5vh;
       width: 90vw;
       height: 90vh;
-      max-width: 1100px;
-      max-height: 700px;
+      max-width: 360px;
+      max-height: 750px;
 
       .inner {
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
+        justify-content: center;
         margin: auto;
         padding: 2%;
         width: 80vw;
-        height: 86vh;
+        height: 45vh;
+        min-height: 580px;
         max-width: 320px;
-        background: url("../../image/mobile-background.png");
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
+        background: white;
+        box-shadow: 0 0 0.5rem 0.1rem #e0e0e0;
 
         .header {
           margin: 0 auto;
           width: 300px;
           text-align: center;
 
-          .header_h1 {
+          .headerH1 {
             margin-top: 0;
             height: 55px;
             color: $accent-color;
@@ -92,7 +92,7 @@
             line-height: 4.85rem;
           }
 
-          .header_span {
+          .headerSpan {
             margin-top: 0.3rem;
             font-size: 1rem;
             font-family: RixYeoljeongdo_Regular;

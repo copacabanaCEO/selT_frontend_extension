@@ -25,8 +25,8 @@ function Main() {
       <div className="outer">
         <div className="inner">
           <header className="header">
-            <h1 className="header_h1">셀티</h1>
-            <span className="header_span">수시 합격예측</span>
+            <h1 className="headerH1">selT</h1>
+            <span className="headerSpan">수시 합격예측</span>
           </header>
           {!showResult ? (
             <Form

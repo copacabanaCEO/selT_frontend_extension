@@ -1,0 +1,49 @@
+.admissionType {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+  height: 3.5rem;
+  border: 2px solid #26a58a;
+  border-radius: 15px;
+
+  .admissionToggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 145px;
+    height: 3.6rem;
+    border-radius: 14px;
+    border: 2px solid #26a58a;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 750px) {
+  .admissionType {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px auto !important;
+    width: 248px;
+    height: 54px;
+    border: 1px solid #26a58a;
+    border-radius: 15px;
+
+    .admissionToggle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 200px;
+      height: 54px;
+      color: white;
+      font-size: 1.7rem;
+      font-weight: bold;
+      border-radius: 14px;
+    }
+  }
+}

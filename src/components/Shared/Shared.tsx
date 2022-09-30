@@ -1,16 +1,16 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import ResultInfo from "../Result-info/Result_info";
+import ResultInfo from "../ResultInfo/ResultInfo";
 import "./Shared.scss";
 
 interface ParamTypes {
   name: string;
-  college_percentage: number;
+  collegePercentage: number;
   feedback: string;
 }
 
 function Shared() {
-  const { name, college_percentage, feedback } =
+  const { name, collegePercentage, feedback } =
     useParams() as unknown as ParamTypes;
 
   return (
@@ -18,13 +18,13 @@ function Shared() {
       <div className="outer">
         <div className="inner">
           <div className="header">
-            <h1 className="header_h1">셀티</h1>
-            <span className="header_span">수시 합격예측</span>
+            <h1 className="headerH1">셀티</h1>
+            <span className="headerSpan">수시 합격예측</span>
           </div>
           <div className="result">
             <ResultInfo
               name={name}
-              college_percentage={Number(college_percentage)}
+              collegePercentage={Number(collegePercentage)}
               feedback={feedback}
             />
           </div>

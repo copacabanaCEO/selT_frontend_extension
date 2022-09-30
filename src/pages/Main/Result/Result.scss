@@ -9,12 +9,12 @@
   align-items: center;
   margin: 5px 10px !important;
 
-  .result_button_wrap {
+  .resultButtonWrap {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    .result_button {
+    .resultButton {
       background: $main-button-color !important;
       color: white !important;
       padding: 10px 0 8px !important;
@@ -36,12 +36,12 @@
     justify-content: space-between;
     align-items: center;
 
-    .result_button_wrap {
+    .resultButtonWrap {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      .result_button {
+      .resultButton {
         background: $main-button-color !important;
         color: white !important;
         padding: 10px 0 8px !important;

@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect } from "react";
 import Button from "@mui/material/Button";
-import ResultInfo from "../../../components/Result-info/Result_info";
+import ResultInfo from "../../../components/ResultInfo/ResultInfo";
 import "./Result.scss";
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
 function Result({ setShowResult, result, name }: Props) {
   const { 예측결과, 피드백 } = result;
 
-  const share_kakao = () => {
+  const shareKakao = () => {
     let link = `https://www.copacabana.co.kr/shared/${name}/${예측결과}/${피드백}`;
 
     window.Kakao.Link.createDefaultButton({
@@ -49,12 +49,13 @@ function Result({ setShowResult, result, name }: Props) {
   };
 
   useEffect(() => {
-    share_kakao();
+    shareKakao();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="result">
-      <ResultInfo name={name} college_percentage={예측결과} feedback={피드백} />
+      <ResultInfo name={name} collegePercentage={예측결과} feedback={피드백} />
       <div className="result_button_wrap">
         <Button className="result_button" onClick={() => setShowResult(false)}>
           {" "}
@@ -62,8 +63,8 @@ function Result({ setShowResult, result, name }: Props) {
         </Button>
         <Button
           id="kakao-link-btn"
-          className="result_button"
-          onClick={share_kakao}
+          className="resultButton"
+          onClick={shareKakao}
         >
           공유하기{" "}
           <img
