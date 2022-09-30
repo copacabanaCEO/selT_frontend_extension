@@ -11,13 +11,15 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Loading from "../../../components/Loading/Loading";
 import "../../../styles/variables.scss";
 import "./Form.scss";
+import { useNavigate } from "react-router-dom";
 
 interface form_props {
   setShowResult: Dispatch<SetStateAction<boolean>>;
   setResult: Dispatch<
     SetStateAction<{
-      college_percentage: number;
-      feedback: string;
+      예측결과: number;
+      진단결과: { college: string; college_percentage: number; major: string };
+      피드백: string;
     }>
   >;
   setName: Dispatch<SetStateAction<string>>;
@@ -33,8 +35,9 @@ function Form({ setShowResult, setResult, setName }: form_props) {
   const [locationList, setLocationList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [resize, setResize] = useState(0);
+  const navigate = useNavigate();
 
-  const url = "https://cors-everywhere-me.herokuapp.com/http://52.78.211.155";
+  const url = "http://43.201.70.179:8000";
   const main_button_color = `linear-gradient(
     -90deg,
     rgba(86, 157, 189) 0%,
@@ -179,8 +182,11 @@ function Form({ setShowResult, setResult, setName }: form_props) {
     };
 
     fetch(`${url}/selT/college-prediction`, request_options)
-      .then((response) => response.json())
+      .then((response) =>
+        response.status >= 400 ? navigate("/exception") : response.json()
+      )
       .then((data) => {
+        console.log(data);
         setResult(data);
         setShowResult(true);
       })
@@ -287,7 +293,7 @@ function Form({ setShowResult, setResult, setName }: form_props) {
             autoComplete="on"
             className="avg_gpa"
             inputProps={{
-              pattern: "[0-9]*.[0-9]*",
+              pattern: "[0-9].*[0-9]*",
             }}
             name="avg_gpa"
             sx={{ ...style, color: "success.main" }}
