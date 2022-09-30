@@ -61,6 +61,7 @@ function Form({ setShowResult, setResult }: Props) {
   const [uniList, setUniList] = useState([]);
   const [majorList, setMajorList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const url = "http://43.201.70.179:8000";
   const accentColor = `lightgreen`;
@@ -153,7 +154,7 @@ function Form({ setShowResult, setResult }: Props) {
       body: JSON.stringify(data),
     };
 
-    fetch(`${url}/selT/college-prediction`, request_options)
+    fetch(`${url}/selT/college-prediction`, requestOptions)
       .then((response) =>
         response.status >= 400 ? navigate("/exception") : response.json()
       )
@@ -168,7 +169,7 @@ function Form({ setShowResult, setResult }: Props) {
 
   const style = {
     "& label.Mui-focused": {
-      color: "green",
+      color: "#26A58A",
     },
     "& .MuiOutlinedInput-root": {
       "&.Mui-focused fieldset": {

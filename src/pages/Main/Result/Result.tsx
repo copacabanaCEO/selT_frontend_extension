@@ -50,11 +50,12 @@ function Result({ setShowResult, result, name }: Props) {
 
   useEffect(() => {
     shareKakao();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="result">
-      <ResultInfo name={name} college_percentage={예측결과} feedback={피드백} />
+      <ResultInfo name={name} collegePercentage={예측결과} feedback={피드백} />
       <div className="result_button_wrap">
         <Button className="result_button" onClick={() => setShowResult(false)}>
           {" "}

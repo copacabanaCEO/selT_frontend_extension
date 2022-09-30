@@ -38,7 +38,7 @@
   .submitButton {
     padding: 10px 88px 8px !important;
     font-size: 1rem !important;
-    background: green !important;
+    background: #26a58a !important;
     color: white !important;
     padding: 10px 0 8px !important;
     margin: 30px auto !important;
@@ -57,7 +57,7 @@
     }
 
     ::-webkit-scrollbar-thumb {
-      background-color: green;
+      background-color: #26a58a;
     }
 
     .formWrap {
@@ -108,7 +108,7 @@
       margin: 5px auto !important;
       padding: 10px 88px 8px !important;
       width: 180px;
-      background: green !important;
+      background: #26a58a !important;
       border-radius: 0.7rem !important;
       color: white !important;
       font-size: 1rem !important;
@@ -127,11 +127,11 @@
 }
 
 .MuiFormControl-root fieldset {
-  border-color: green;
+  border-color: #26a58a;
   border-radius: 0.7rem;
   border-width: 1px;
 }
 
 .MuiFormControl-root svg {
-  fill: lightgreen;
+  fill: #26a58a;
 }

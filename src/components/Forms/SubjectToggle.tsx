@@ -24,9 +24,9 @@ function SubjectToggle({ isSubject, setIsSubject }: SubjectToggleProps) {
         className="admissionToggle"
         onClick={handleTotal}
         style={{
-          background: isSubject ? "white" : "green",
-          border: `1px solid ${isSubject ? "white" : "green"}`,
-          color: isSubject ? "green" : "white",
+          background: isSubject ? "white" : "#26A58A",
+          border: `1px solid ${isSubject ? "white" : "#26A58A"}`,
+          color: isSubject ? "#26A58A" : "white",
           transitionDuration: "0.1s",
         }}
       >
@@ -36,9 +36,9 @@ function SubjectToggle({ isSubject, setIsSubject }: SubjectToggleProps) {
         className="admissionToggle"
         onClick={handleSubject}
         style={{
-          background: isSubject ? "green" : "white",
-          border: `1px solid ${isSubject ? "green" : "white"}`,
-          color: isSubject ? "white" : "green",
+          background: isSubject ? "#26A58A" : "white",
+          border: `1px solid ${isSubject ? "#26A58A" : "white"}`,
+          color: isSubject ? "white" : "#26A58A",
           transitionDuration: "0.1s",
         }}
       >
