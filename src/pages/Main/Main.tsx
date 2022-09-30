@@ -8,9 +8,18 @@ function Main() {
   const [showResult, setShowResult] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
   const [result, setResult] = useState<{
-    collegePercentage: number;
-    feedback: string;
-  }>({ collegePercentage: 97.18985698889139, feedback: "묻고 따블로 가" });
+    예측결과: number;
+    진단결과: { college: string; college_percentage: number; major: string };
+    피드백: string;
+  }>({
+    예측결과: 97.18985698889139,
+    진단결과: {
+      college: "가천대",
+      college_percentage: 99.999999991,
+      major: "약학과",
+    },
+    피드백: "묻고 따블로 가",
+  });
   return (
     <div className="main">
       <div className="outer">

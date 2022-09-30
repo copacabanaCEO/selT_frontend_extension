@@ -5,14 +5,18 @@ import "./Result.scss";
 
 interface Props {
   setShowResult: Dispatch<SetStateAction<boolean>>;
-  result: { collegePercentage: number; feedback: string };
+  result: {
+    예측결과: number;
+    진단결과: { college: string; college_percentage: number; major: string };
+    피드백: string;
+  };
   name: string;
 }
 function Result({ setShowResult, result, name }: Props) {
-  const { collegePercentage, feedback } = result;
+  const { 예측결과, 피드백 } = result;
 
   const shareKakao = () => {
-    let link = `https://www.copacabana.co.kr/shared/${name}/${collegePercentage}/${feedback}`;
+    let link = `https://www.copacabana.co.kr/shared/${name}/${예측결과}/${피드백}`;
 
     window.Kakao.Link.createDefaultButton({
       container: "#kakao-link-btn",
@@ -50,13 +54,9 @@ function Result({ setShowResult, result, name }: Props) {
 
   return (
     <div className="result">
-      <ResultInfo
-        name={name}
-        collegePercentage={Number(collegePercentage)}
-        feedback={feedback}
-      />
-      <div className="resultButtonWrap">
-        <Button className="resultButton" onClick={() => setShowResult(false)}>
+      <ResultInfo name={name} college_percentage={예측결과} feedback={피드백} />
+      <div className="result_button_wrap">
+        <Button className="result_button" onClick={() => setShowResult(false)}>
           {" "}
           다시하기{" "}
         </Button>

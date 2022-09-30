@@ -11,13 +11,15 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Loading from "../../../components/Loading/Loading";
 import SubjectToggle from "../../../components/Forms/SubjectToggle";
 import "./Form.scss";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   setShowResult: Dispatch<SetStateAction<boolean>>;
   setResult: Dispatch<
     SetStateAction<{
-      collegePercentage: number;
-      feedback: string;
+      예측결과: number;
+      진단결과: { college: string; college_percentage: number; major: string };
+      피드백: string;
     }>
   >;
   setName: Dispatch<SetStateAction<string>>;
@@ -151,9 +153,12 @@ function Form({ setShowResult, setResult }: Props) {
       body: JSON.stringify(data),
     };
 
-    fetch(`${url}/selT/college-prediction`, requestOptions)
-      .then((response) => response.json())
+    fetch(`${url}/selT/college-prediction`, request_options)
+      .then((response) =>
+        response.status >= 400 ? navigate("/exception") : response.json()
+      )
       .then((data) => {
+        console.log(data);
         setResult(data);
 
         setShowResult(true);
@@ -188,7 +193,7 @@ function Form({ setShowResult, setResult }: Props) {
             label="내신점수"
             id="avgGpaForm"
             inputProps={{
-              pattern: "[0-9]*.[0-9]*",
+              pattern: "[0-9].*[0-9]*",
             }}
             name="avgGpa"
             sx={{ ...style, color: "success.main" }}
