@@ -56,8 +56,8 @@ function Result({ setShowResult, result, name }: Props) {
   return (
     <div className="result">
       <ResultInfo name={name} collegePercentage={예측결과} feedback={피드백} />
-      <div className="result_button_wrap">
-        <Button className="result_button" onClick={() => setShowResult(false)}>
+      <div className="buttonWrap">
+        <Button className="resultButton" onClick={() => setShowResult(false)}>
           {" "}
           다시하기{" "}
         </Button>
@@ -74,6 +74,9 @@ function Result({ setShowResult, result, name }: Props) {
             style={{ width: "1.3rem", marginLeft: "5px" }}
           />
         </Button>
+        <button className="resultButton">
+          추천 학교 {<br />} 학과 보러가기
+        </button>
       </div>
     </div>
   );

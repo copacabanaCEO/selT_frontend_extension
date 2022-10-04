@@ -23,6 +23,11 @@ interface Props {
     }>
   >;
   setName: Dispatch<SetStateAction<string>>;
+  result: {
+    예측결과: number;
+    진단결과: { college: string; college_percentage: number; major: string };
+    피드백: string;
+  };
 }
 
 interface CollegeObject {
@@ -39,109 +44,87 @@ interface CollegeObject {
   year: number;
 }
 
-interface MajorObject {
-  admissionType: string;
-  avgGpa: number;
-  campus: string;
-  college: string;
-  id: number;
-  major: string;
-  maxGpa: number;
-  medGpa: number;
-  minGpa: number;
-  stdevGpa: number;
-  year: number;
-}
-
 type uniList = string[];
-type majorList = string[];
 
-function Form({ setShowResult, setResult }: Props) {
-  const [isSubject, setIsSubject] = useState(true);
+function Form({ setShowResult, setResult, result }: Props) {
+  const [isSubject, setIsSubject] = useState(false);
   const [uniList, setUniList] = useState([]);
   const [majorList, setMajorList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const url = "http://43.201.70.179:8000";
+  const url = "http://10.36.180.206:8000";
   const accentColor = `lightgreen`;
 
   useEffect(() => {
     loadUniversityList();
-    loadMajor();
   }, []);
 
   async function loadUniversityList() {
-    try {
-      const res = await fetch(`${url}/selT/college`);
-      const data = await res.json();
-      const test = data.reduce((acc: uniList, cur: CollegeObject) => {
-        if (!acc.includes(cur.college)) {
-          return [...acc, cur.college];
-        }
-        return acc;
-      }, []);
-      setUniList(test);
-    } catch (e) {
-      console.log("error! :" + e);
-    }
+    const res = await fetch(`${url}/selT/college`);
+    const data = await res.json();
+    const test = data.reduce((acc: uniList, cur: CollegeObject) => {
+      if (!acc.includes(cur.college)) {
+        return [...acc, cur.college];
+      }
+      return acc;
+    }, []);
+    setUniList(test);
   }
-  //console.log("uniList", uniList);
 
-  async function loadMajor() {
-    try {
-      const res = await fetch(`${url}/selT/college?college`);
-      const data = await res.json();
-      const test = data.reduce((acc: majorList, cur: MajorObject) => {
-        if (!acc.includes(cur.major)) {
-          return [...acc, cur.major];
-        }
-        return acc;
-      }, []);
-      setMajorList(test);
-    } catch (e) {
-      console.log("error! :" + e);
-    }
-  }
-  //console.log("majorList", majorList);
-
-  // const load_major = (uni: any) => {
-  //   fetch(`${url}/selT/college?college=${uni}`)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setMajorList(
-  //         data
-  //           .filter((el: any) => el.college === uni)
-  //           .map((el: any) => el.major)
-  //       );
-  //     })
-  //     .catch((err) => console.log("error! :" + err));
-  // };
+  const loadMajor = (uni: any) => {
+    fetch(
+      `${url}/selT/college?college=${uni}&admission_type=${
+        isSubject ? "교과" : "종합"
+      }`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setMajorList(
+          data
+            .filter((el: any) => el.college === uni)
+            .map((el: any) => el.major)
+        );
+      });
+  };
 
   interface infoI {
-    admissionType: string;
-    avgGpa: number; //소수점 확인
+    name: "뚱이";
+    email: "pmb087@gmail.com";
+    is_male: true;
+    admission_type: string;
+    avg_gpa: number;
     college: {
       college: string;
       major: string;
+    };
+    highschool: {
+      name: "평촌고";
+      location: "경기";
     };
   }
 
   function submitForm(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const { avgGpa, college, major } = e.target as typeof e.target & {
-      admissionType: { value: string };
       avgGpa: { value: number };
       college: { value: string };
       major: { value: string };
     };
 
     let data: infoI = {
-      admissionType: isSubject ? "교과" : "종합",
-      avgGpa: Number(avgGpa.value), //소수점 확인
+      name: "뚱이",
+      email: "pmb087@gmail.com",
+      is_male: true,
+      admission_type: isSubject ? "교과" : "종합",
+      avg_gpa: Number(avgGpa.value),
       college: {
         college: college.value,
         major: major.value,
+      },
+      highschool: {
+        name: "평촌고",
+        location: "경기",
       },
     };
 
@@ -159,12 +142,10 @@ function Form({ setShowResult, setResult }: Props) {
         response.status >= 400 ? navigate("/exception") : response.json()
       )
       .then((data) => {
-        console.log(data);
         setResult(data);
-
+        console.log(data);
         setShowResult(true);
-      })
-      .catch((err) => console.log("error! :" + err));
+      });
   }
 
   const style = {
@@ -213,7 +194,7 @@ function Form({ setShowResult, setResult }: Props) {
               <TextField {...params} label="희망대학" required />
             )}
             onChange={(e, value: string | null) => {
-              loadMajor();
+              loadMajor(value);
             }}
             onKeyDown={(e) => {
               if (e.key === "Enter") {

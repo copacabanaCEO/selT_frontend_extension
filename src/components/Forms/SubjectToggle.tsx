@@ -13,7 +13,6 @@ function SubjectToggle({ isSubject, setIsSubject }: SubjectToggleProps) {
   };
 
   const handleTotal = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log("iswork?");
     e.preventDefault();
     setIsSubject(false);
   };
