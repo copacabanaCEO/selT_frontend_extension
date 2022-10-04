@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction, useEffect } from "react";
 import Button from "@mui/material/Button";
 import ResultInfo from "../../../components/ResultInfo/ResultInfo";
 import "./Result.scss";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   setShowResult: Dispatch<SetStateAction<boolean>>;
@@ -13,7 +14,8 @@ interface Props {
   name: string;
 }
 function Result({ setShowResult, result, name }: Props) {
-  const { 예측결과, 피드백 } = result;
+  const { 예측결과, 피드백, 진단결과 } = result;
+  const navigate = useNavigate();
 
   const shareKakao = () => {
     let link = `https://www.copacabana.co.kr/shared/${name}/${예측결과}/${피드백}`;
@@ -74,7 +76,10 @@ function Result({ setShowResult, result, name }: Props) {
             style={{ width: "1.3rem", marginLeft: "5px" }}
           />
         </Button>
-        <button className="resultButton">
+        <button
+          className="resultButton"
+          onClick={() => navigate("/recommend", { state: 진단결과 })}
+        >
           추천 학교 {<br />} 학과 보러가기
         </button>
       </div>

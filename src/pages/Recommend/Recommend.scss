@@ -1,0 +1,268 @@
+.recommend {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: #fafafa;
+  .recommendInner {
+    border: 1px solid #cccccc;
+    background-color: white;
+    width: 700px;
+    border-radius: 1rem;
+    margin: 2rem auto;
+    box-shadow: 0 0 0.2rem 0.2rem #f0f0f0;
+
+    .goToMain {
+      border: none;
+      background-color: white;
+      color: #3f3f3f;
+      font-size: 1.1rem;
+      margin: 1rem;
+      font-weight: bold;
+    }
+
+    .recommendHeaderUnderLine {
+      position: relative;
+      width: 17rem;
+      height: 0.8rem;
+      margin: 4rem 2rem 2rem 2rem;
+      background-color: #26a58a;
+
+      .recommendHeader {
+        position: absolute;
+        font-size: 3.5rem;
+        font-weight: bolder;
+        color: #3f3f3f;
+        top: -2.9rem;
+        left: 1rem;
+      }
+    }
+    .recommendFilter {
+      display: flex;
+      align-items: center;
+      margin: 0 2rem 1rem;
+      background-color: white;
+      border-bottom: 1px solid #cccccc;
+      .recommendFilterButton {
+        border: none;
+        background-color: white;
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin: 5px 15px 0;
+        border-radius: 5px 5px 0 0;
+        cursor: pointer;
+      }
+    }
+    .recommendListWrap {
+      margin: 1rem;
+      height: 500px;
+      border: 1px solid #cccccc;
+      background-color: #fafafa;
+      border-radius: 10px 0 0 10px;
+      overflow-y: scroll;
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+      &::-webkit-scrollbar-track {
+        background: white;
+        border-left: 1px solid #cccccc;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: #26a58a;
+
+        &:hover {
+          background: #3dc9ab;
+        }
+      }
+      .recommendList {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: white;
+        margin: 1rem;
+        padding: 1rem;
+        background-color: white;
+        border-radius: 5px;
+        border: 1px solid #cccccc;
+        box-shadow: 0 0 0.2rem 0.2rem #f0f0f0;
+        .recommendListUni {
+          font-size: 1.1rem;
+          letter-spacing: 0.1rem;
+          font-weight: bolder;
+          color: #5f5f5f;
+          width: 8rem;
+        }
+        .recommendListMajor {
+          font-size: 1rem;
+          font-weight: bold;
+          color: #5f5f5f;
+          width: 10rem;
+        }
+        .recommendListPercentage {
+          position: relative;
+          display: flex;
+          align-items: center;
+          width: 10rem;
+          height: 1.2rem;
+          border: 2px solid #cccccc;
+          border-radius: calc(0.6rem + 1px);
+          background-color: rgb(255, 255, 255);
+          .recommendListPercentageInner {
+            height: calc(1.2rem + 2px);
+            border-radius: 0.6rem;
+            background-color: #26a58a;
+          }
+          .recommendListPercentageText {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            position: absolute;
+            left: 38%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .recommend {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: #fafafa;
+    .recommendInner {
+      border: 1px solid #cccccc;
+      background-color: white;
+      width: 350px;
+      border-radius: 1rem;
+      margin: 2rem auto;
+      box-shadow: 0 0 0.2rem 0.2rem #f0f0f0;
+
+      .goToMain {
+        border: none;
+        background-color: white;
+        color: #3f3f3f;
+        font-size: 0.9rem;
+        margin: 0.8rem;
+        font-weight: bold;
+      }
+
+      .recommendHeaderUnderLine {
+        position: relative;
+        width: 17rem;
+        height: 0.8rem;
+        margin: 4rem 2rem 2rem 2rem;
+        background-color: #26a58a;
+
+        .recommendHeader {
+          position: absolute;
+          font-size: 3rem;
+          font-weight: bolder;
+          color: #3f3f3f;
+          top: -2.5rem;
+          left: 2rem;
+        }
+      }
+      .recommendFilter {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 2rem 1rem;
+        background-color: white;
+        border-bottom: 1px solid #cccccc;
+        .recommendFilterButton {
+          border: none;
+          background-color: white;
+          font-size: 1.2rem;
+          font-weight: 500;
+          margin: 5px 15px 0;
+          border-radius: 5px 5px 0 0;
+          cursor: pointer;
+        }
+      }
+      .recommendListWrap {
+        display: flex;
+        flex-direction: column;
+        height: 500px;
+        margin: 1rem;
+        border: 1px solid #cccccc;
+        background-color: #fafafa;
+        border-radius: 10px 0 0 10px;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+          width: 5px;
+        }
+        &::-webkit-scrollbar-track {
+          background: white;
+          border-left: 1px solid #cccccc;
+        }
+        &::-webkit-scrollbar-thumb {
+          background: #26a58a;
+
+          &:hover {
+            background: #3dc9ab;
+          }
+        }
+        .recommendList {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          background-color: white;
+          margin: 1rem;
+          padding: 1rem;
+          background-color: white;
+          border-radius: 5px;
+          border: 1px solid #cccccc;
+          box-shadow: 0 0 0.2rem 0.2rem #f0f0f0;
+          .recommendListUni {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            letter-spacing: 0.1rem;
+            font-weight: bolder;
+            text-align: center;
+            color: #5f5f5f;
+          }
+          .recommendListMajor {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #5f5f5f;
+            margin: 10px 0;
+          }
+          .recommendListPercentage {
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 1.2rem;
+            border: 2px solid #cccccc;
+            border-radius: calc(0.6rem + 1px);
+            background-color: rgb(255, 255, 255);
+            .recommendListPercentageInner {
+              height: calc(1.2rem + 2px);
+              border-radius: 0.6rem;
+              background-color: #26a58a;
+            }
+            .recommendListPercentageText {
+              font-size: 0.8rem;
+              font-weight: bold;
+              color: white;
+              position: absolute;
+              left: 38%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

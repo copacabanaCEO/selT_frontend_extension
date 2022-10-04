@@ -61,7 +61,7 @@ function Form({ setShowResult, setResult, result }: Props) {
   }, []);
 
   async function loadUniversityList() {
-    const res = await fetch(`${url}/selT/college`);
+    const res = await fetch(`${url}/selT/college-event`);
     const data = await res.json();
     const test = data.reduce((acc: uniList, cur: CollegeObject) => {
       if (!acc.includes(cur.college)) {
@@ -74,7 +74,7 @@ function Form({ setShowResult, setResult, result }: Props) {
 
   const loadMajor = (uni: any) => {
     fetch(
-      `${url}/selT/college?college=${uni}&admission_type=${
+      `${url}/selT/college-event?college=${uni}&admission_type=${
         isSubject ? "교과" : "종합"
       }`
     )
@@ -143,7 +143,6 @@ function Form({ setShowResult, setResult, result }: Props) {
       )
       .then((data) => {
         setResult(data);
-        console.log(data);
         setShowResult(true);
       });
   }
