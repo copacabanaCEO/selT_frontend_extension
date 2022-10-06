@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Main from "./pages/Main/Main";
 import Recommend from "./pages/Recommend/Recommend.tsx";
 import Exception from "./pages/Exception/Exception.tsx";
+import GoToMain from "./pages/GoToMain.js";
 function Router() {
   return (
     <Routes>
@@ -14,6 +15,7 @@ function Router() {
       <Route path="/main" element={<Main />} />
       <Route path="/exception" element={<Exception />} />
       <Route path="/recommend" element={<Recommend />} />
+      <Route path="/" element={<GoToMain />} />
     </Routes>
   );
 }
