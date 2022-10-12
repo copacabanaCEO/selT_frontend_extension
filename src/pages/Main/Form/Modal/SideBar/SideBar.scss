@@ -1,0 +1,19 @@
+.sideBar {
+  height: 100%;
+  width: 80px;
+  border-radius: 1rem 0 0 0rem;
+  display: flex;
+  flex-direction: column;
+
+  .sideBarInner {
+    height: 100%;
+    border: 1px solid #bbbbbb;
+    background-color: #a0dacd;
+    font-weight: bolder;
+    color: #555555;
+  }
+
+  #firstInner {
+    border-radius: 1rem 0 0 0;
+  }
+}

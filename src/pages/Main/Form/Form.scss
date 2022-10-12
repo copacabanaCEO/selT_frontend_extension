@@ -18,9 +18,15 @@
       align-items: center;
       margin-top: 30px;
 
-      .avgGpa {
+      .dialogButton {
         width: 300px;
         margin-top: 15px;
+        height: 56px;
+        border-radius: 0.7rem;
+        border: 1px solid #26a58a;
+        background-color: white;
+        font-size: 16px;
+        color: #26a58a;
       }
 
       .college {
@@ -70,7 +76,7 @@
       height: 70vh;
       max-height: 450px;
       justify-content: space-between;
-      overflow-y: scroll;
+      overflow: hidden;
 
       .inputWrap {
         display: flex;
@@ -78,9 +84,7 @@
         align-items: center;
         justify-content: space-around;
 
-        .avgGpa {
-          display: inline-flex;
-          flex-direction: column;
+        .dialogButton {
           margin: 15px auto !important;
           width: 250px;
         }

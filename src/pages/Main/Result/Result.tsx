@@ -58,7 +58,7 @@ function Result({ setShowResult, result, name }: Props) {
   return (
     <div className="result">
       <ResultInfo name={name} collegePercentage={예측결과} feedback={피드백} />
-      <div className="buttonWrap">
+      <div className="resultButtonWrap">
         <Button className="resultButton" onClick={() => setShowResult(false)}>
           {" "}
           다시하기{" "}

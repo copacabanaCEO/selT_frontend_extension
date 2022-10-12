@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import Autocomplete from "@mui/material/Autocomplete";
 import Loading from "../../../components/Loading/Loading";
 import SubjectToggle from "../../../components/Forms/SubjectToggle";
+import Modal from "../Form/Modal/Modal";
 import "./Form.scss";
 import { useNavigate } from "react-router-dom";
 
@@ -44,16 +45,104 @@ interface CollegeObject {
   year: number;
 }
 
+interface MajorObject {
+  admissionType: string;
+  avgGpa: number;
+  campus: string;
+  college: string;
+  id: number;
+  major: string;
+  maxGpa: number;
+  medGpa: number;
+  minGpa: number;
+  stdevGpa: number;
+  year: number;
+}
+
 type uniList = string[];
 
-function Form({ setShowResult, setResult, result }: Props) {
-  const [isSubject, setIsSubject] = useState(false);
+function Form({ setShowResult, setResult }: Props) {
+  const [isSubject, setIsSubject] = useState(true);
   const [uniList, setUniList] = useState([]);
   const [majorList, setMajorList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isOpenModal, setOpenModal] = useState<boolean>(false);
+
+  const [testScore1, setTestScore1] = useState({
+    국U: "",
+    국S: "",
+    수U: "",
+    수S: "",
+    영U: "",
+    영S: "",
+    사U: "",
+    사S: "",
+    과U: "",
+    과S: "",
+  });
+  const [testScore2, setTestScore2] = useState({
+    국U: "",
+    국S: "",
+    수U: "",
+    수S: "",
+    영U: "",
+    영S: "",
+    사U: "",
+    사S: "",
+    과U: "",
+    과S: "",
+  });
+  const [testScore3, setTestScore3] = useState({
+    국U: "",
+    국S: "",
+    수U: "",
+    수S: "",
+    영U: "",
+    영S: "",
+    사U: "",
+    사S: "",
+    과U: "",
+    과S: "",
+  });
+  const [testScore4, setTestScore4] = useState({
+    국U: "",
+    국S: "",
+    수U: "",
+    수S: "",
+    영U: "",
+    영S: "",
+    사U: "",
+    사S: "",
+    과U: "",
+    과S: "",
+  });
+  const [testScore5, setTestScore5] = useState({
+    국U: "",
+    국S: "",
+    수U: "",
+    수S: "",
+    영U: "",
+    영S: "",
+    사U: "",
+    사S: "",
+    과U: "",
+    과S: "",
+  });
+  const [testScore6, setTestScore6] = useState({
+    국U: "",
+    국S: "",
+    수U: "",
+    수S: "",
+    영U: "",
+    영S: "",
+    사U: "",
+    사S: "",
+    과U: "",
+    과S: "",
+  });
   const navigate = useNavigate();
 
-  const url = "http://10.36.180.206:8000";
+  const url = "http://43.201.70.179:8000";
   const accentColor = `lightgreen`;
 
   useEffect(() => {
@@ -98,10 +187,6 @@ function Form({ setShowResult, setResult, result }: Props) {
       college: string;
       major: string;
     };
-    highschool: {
-      name: "평촌고";
-      location: "경기";
-    };
   }
 
   function submitForm(e: FormEvent<HTMLFormElement>) {
@@ -122,10 +207,6 @@ function Form({ setShowResult, setResult, result }: Props) {
         college: college.value,
         major: major.value,
       },
-      highschool: {
-        name: "평촌고",
-        location: "경기",
-      },
     };
 
     const requestOptions: any = {
@@ -143,9 +224,14 @@ function Form({ setShowResult, setResult, result }: Props) {
       )
       .then((data) => {
         setResult(data);
+
         setShowResult(true);
       });
   }
+
+  const onClickToggleModal = () => {
+    setOpenModal((prev) => !prev);
+  };
 
   const style = {
     "& label.Mui-focused": {
@@ -161,37 +247,31 @@ function Form({ setShowResult, setResult, result }: Props) {
   return (
     <div className="form">
       <form
+        className="formWrap"
         onSubmit={(e) => {
           submitForm(e);
           setIsLoading(true);
         }}
-        className="formWrap"
       >
         <div className="inputWrap">
           <SubjectToggle setIsSubject={setIsSubject} isSubject={isSubject} />
-          <TextField
-            className="avgGpa"
-            label="내신점수"
-            id="avgGpaForm"
-            inputProps={{
-              pattern: "[0-9].*[0-9]*",
+
+          <button
+            className="dialogButton"
+            onClick={(e) => {
+              onClickToggleModal();
+              e.preventDefault();
             }}
-            name="avgGpa"
-            sx={{ ...style, color: "success.main" }}
-            required
-            onKeyDown={(e) => {
-              if (e.key === "Enter") e.preventDefault();
-            }}
-          />
+          >
+            내신성적 입력하기
+          </button>
           <Autocomplete
             disablePortal
             className="college"
             id="college"
             options={uniList}
             sx={{ ...style, width: 300 }}
-            renderInput={(params) => (
-              <TextField {...params} label="희망대학" required />
-            )}
+            renderInput={(params) => <TextField {...params} label="희망대학" />}
             onChange={(e, value: string | null) => {
               loadMajor(value);
             }}
@@ -207,9 +287,7 @@ function Form({ setShowResult, setResult, result }: Props) {
             id="major"
             options={majorList}
             sx={{ ...style, width: 300 }}
-            renderInput={(params) => (
-              <TextField {...params} label="희망전공" required />
-            )}
+            renderInput={(params) => <TextField {...params} label="희망전공" />}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 e.preventDefault();
@@ -222,6 +300,23 @@ function Form({ setShowResult, setResult, result }: Props) {
         </Button>
       </form>
       {isLoading && <Loading />}
+      {isOpenModal && (
+        <Modal
+          onClickToggleModal={onClickToggleModal}
+          testScore1={testScore1}
+          testScore2={testScore2}
+          testScore3={testScore3}
+          testScore4={testScore4}
+          testScore5={testScore5}
+          testScore6={testScore6}
+          setTestScore1={setTestScore1}
+          setTestScore2={setTestScore2}
+          setTestScore3={setTestScore3}
+          setTestScore4={setTestScore4}
+          setTestScore5={setTestScore5}
+          setTestScore6={setTestScore6}
+        />
+      )}
     </div>
   );
 }
