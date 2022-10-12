@@ -14,6 +14,9 @@ import Modal from "../Form/Modal/Modal";
 import "./Form.scss";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Main component로 부터 받아온 Props 입니다.
+ */
 interface Props {
   setShowResult: Dispatch<SetStateAction<boolean>>;
   setResult: Dispatch<
@@ -23,7 +26,6 @@ interface Props {
       피드백: string;
     }>
   >;
-  setName: Dispatch<SetStateAction<string>>;
   result: {
     예측결과: number;
     진단결과: { college: string; college_percentage: number; major: string };
@@ -45,29 +47,23 @@ interface CollegeObject {
   year: number;
 }
 
-interface MajorObject {
-  admissionType: string;
-  avgGpa: number;
-  campus: string;
-  college: string;
-  id: number;
-  major: string;
-  maxGpa: number;
-  medGpa: number;
-  minGpa: number;
-  stdevGpa: number;
-  year: number;
-}
-
 type uniList = string[];
 
 function Form({ setShowResult, setResult }: Props) {
+  /**
+   * isSubject는 학생의 합격률 조회 종목을 교과인지 종합인지 판단하는 기준이되는 State입니다
+   * uniList는 서버에서 대학교의 리스트를 받아와서 저장하는 State입니다.
+   * majorList는 학생이 선택한 대학교, 종목을 기준으로 필터링된 학과리스트를 저장하는 State입니다
+   * isLoading은 Submit버튼 클릭후 서버에서 데이터를 받아오는 동안 Loading 컴포넌트를 렌더링하는 기준이되는 State입니다
+   * isOpenModal은 정보입력페이지의 내신성적 입력하기 모달 Display [none, flex]를 결정짓는 State입니다.
+   * testScore는 1학년 1학기부터 3학년 2학기까지 총 6개의 탭에서 국,영,수,사,과 5개의 과목의 단위,성적 2개의 데이터를 받아오는
+   * 총 60개의 InputValue를 저장하는 States 입니다.
+   */
   const [isSubject, setIsSubject] = useState(true);
   const [uniList, setUniList] = useState([]);
   const [majorList, setMajorList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
-
   const [testScore1, setTestScore1] = useState({
     국U: "",
     국S: "",

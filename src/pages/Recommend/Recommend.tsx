@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./Recommend.scss";
 
+/**
+ * 결과 확인페이지에 존재하는 추천대학교 리스트 보러가기 버튼을 클릭하여
+ * 해당 페이지에서 관리되는 추천대학교, 추천학과, 합격률 데이터를
+ * useLocation으로 넘겨받습니다
+ * 해당 데이터의 타입입니다.
+ */
 interface RecommendList {
   college: string;
   major: string;
@@ -9,6 +15,10 @@ interface RecommendList {
 }
 
 function Recommend() {
+  /**
+   * useNavigate로 넘겨받은 State를 useLocation으로 location 변수에 할당합니다.
+   * sortValue를 이용하여 해당 변수에 할당된 추천대학교, 추천학과 리스트를 정렬합니다.
+   */
   const location = useLocation();
   const recommendList = location.state;
   const [sortValue, setSortValue] = useState(1);
@@ -119,6 +129,9 @@ function Recommend() {
 
 export default Recommend;
 
+/**
+ * 서버 통신 없이 테스트하기 위한 Mock-Data 입니다.
+ */
 const mockData = [
   { college: "가가대", major: "사사과", college_percentage: 92.123 },
   { college: "나나대", major: "마마과", college_percentage: 93.123 },
