@@ -44,7 +44,6 @@ function Recommend() {
             className="recommendFilterButton"
             onClick={() => setSortValue(3)}
             style={{
-              backgroundColor: `${sortValue === 3 ? "#e0e0e0" : "white"}`,
               borderBottom: `${sortValue === 3 ? "3px solid #26a58a" : "none"}`,
               padding: `${
                 sortValue === 3 ? "5px 5px 7px 5px" : "5px 5px 10px 5px"
@@ -57,7 +56,6 @@ function Recommend() {
             className="recommendFilterButton"
             onClick={() => setSortValue(2)}
             style={{
-              backgroundColor: `${sortValue === 2 ? "#e0e0e0" : "white"}`,
               borderBottom: `${sortValue === 2 ? "3px solid #26a58a" : "none"}`,
               padding: `${
                 sortValue === 2 ? "5px 5px 7px 5px" : "5px 5px 10px 5px"
@@ -70,7 +68,6 @@ function Recommend() {
             className="recommendFilterButton"
             onClick={() => setSortValue(1)}
             style={{
-              backgroundColor: `${sortValue === 1 ? "#e0e0e0" : "white"}`,
               borderBottom: `${sortValue === 1 ? "3px solid #26a58a" : "none"}`,
               padding: `${
                 sortValue === 1 ? "5px 5px 7px 5px" : "5px 5px 10px 5px"
@@ -81,7 +78,8 @@ function Recommend() {
           </button>
         </div>
         <div className="recommendListWrap">
-          {recommendList
+          {/*recommendList*/}
+          {mockData
             .sort(
               sortValue === 1
                 ? sortByPercentage
@@ -120,3 +118,14 @@ function Recommend() {
 }
 
 export default Recommend;
+
+const mockData = [
+  { college: "가가대", major: "사사과", college_percentage: 92.123 },
+  { college: "나나대", major: "마마과", college_percentage: 93.123 },
+  { college: "다다대", major: "다다과", college_percentage: 94.123 },
+  { college: "라라대", major: "가가과", college_percentage: 95.123 },
+  { college: "마마대", major: "나나과", college_percentage: 96.123 },
+  { college: "바바대", major: "라라과", college_percentage: 97.123 },
+  { college: "사사대", major: "바바과", college_percentage: 98.123 },
+  { college: "아아대", major: "아아과", college_percentage: 99.123 },
+];

@@ -1,0 +1,129 @@
+.modalContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 10px;
+  left: 0%;
+
+  .dialogBox {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 0 30px rgba(30, 30, 30, 0.185);
+    box-sizing: border-box;
+    background-color: white;
+    z-index: 10000;
+    border-radius: 1rem;
+
+    .dialogInner {
+      display: flex;
+      height: 87.5%;
+    }
+
+    .buttonWrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 12.5%;
+      border-radius: 0 0 1rem 1rem;
+      background-color: #fafafa;
+      border-top: 1px solid #cccccc;
+
+      .avgSubmit {
+        border: none;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.7rem;
+        font-weight: bold;
+        color: white;
+        letter-spacing: 0.05rem;
+        background-color: #26a58a;
+        border-radius: 0.4rem;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .backDrop {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .modalContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -20%;
+    left: 0%;
+
+    .dialogBox {
+      width: 330px;
+      height: 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      border: none;
+      border-radius: 3px;
+      box-shadow: 0 0 30px rgba(30, 30, 30, 0.185);
+      box-sizing: border-box;
+      background-color: white;
+      z-index: 10000;
+      border-radius: 1rem;
+
+      .dialogInner {
+        display: flex;
+        height: 87.5%;
+      }
+
+      .buttonWrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 12.5%;
+        border-radius: 0 0 1rem 1rem;
+        background-color: #fafafa;
+        border-top: 1px solid #cccccc;
+
+        .avgSubmit {
+          border: none;
+          padding: 0.4rem 0.8rem;
+          font-size: 0.7rem;
+          font-weight: bold;
+          color: white;
+          letter-spacing: 0.05rem;
+          background-color: #26a58a;
+          border-radius: 0.4rem;
+          text-transform: uppercase;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .backdrop {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      z-index: 9999;
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+  }
+}
