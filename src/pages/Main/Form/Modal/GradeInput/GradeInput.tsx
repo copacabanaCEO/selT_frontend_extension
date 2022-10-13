@@ -4,29 +4,29 @@ import "./GradeInput.scss";
 interface Props {
   click: boolean;
   testScore: {
-    국U: string;
-    국S: string;
-    수U: string;
-    수S: string;
-    영U: string;
-    영S: string;
-    사U: string;
-    사S: string;
-    과U: string;
-    과S: string;
+    국U: number;
+    국S: number;
+    수U: number;
+    수S: number;
+    영U: number;
+    영S: number;
+    사U: number;
+    사S: number;
+    과U: number;
+    과S: number;
   };
   setTestScore: Dispatch<
     SetStateAction<{
-      국U: string;
-      국S: string;
-      수U: string;
-      수S: string;
-      영U: string;
-      영S: string;
-      사U: string;
-      사S: string;
-      과U: string;
-      과S: string;
+      국U: number;
+      국S: number;
+      수U: number;
+      수S: number;
+      영U: number;
+      영S: number;
+      사U: number;
+      사S: number;
+      과U: number;
+      과S: number;
     }>
   >;
 }

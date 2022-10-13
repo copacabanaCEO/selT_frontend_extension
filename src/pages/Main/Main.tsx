@@ -6,7 +6,7 @@ import "./Main.scss";
 import Logo from "../../image/seltiLogo.png";
 
 function Main() {
-  const [showResult, setShowResult] = useState<boolean>(true);
+  const [showResult, setShowResult] = useState<boolean>(false);
   const [name, setName] = useState<string>("뚱이");
   const [result, setResult] = useState<{
     예측결과: number;

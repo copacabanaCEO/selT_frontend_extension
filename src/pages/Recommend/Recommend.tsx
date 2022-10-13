@@ -78,8 +78,7 @@ function Recommend() {
           </button>
         </div>
         <div className="recommendListWrap">
-          {/*recommendList*/}
-          {mockData
+          {recommendList
             .sort(
               sortValue === 1
                 ? sortByPercentage

@@ -69,80 +69,80 @@ function Form({ setShowResult, setResult }: Props) {
   const [isOpenModal, setOpenModal] = useState<boolean>(false);
 
   const [testScore1, setTestScore1] = useState({
-    국U: "",
-    국S: "",
-    수U: "",
-    수S: "",
-    영U: "",
-    영S: "",
-    사U: "",
-    사S: "",
-    과U: "",
-    과S: "",
+    국U: 0,
+    국S: 0,
+    수U: 0,
+    수S: 0,
+    영U: 0,
+    영S: 0,
+    사U: 0,
+    사S: 0,
+    과U: 0,
+    과S: 0,
   });
   const [testScore2, setTestScore2] = useState({
-    국U: "",
-    국S: "",
-    수U: "",
-    수S: "",
-    영U: "",
-    영S: "",
-    사U: "",
-    사S: "",
-    과U: "",
-    과S: "",
+    국U: 0,
+    국S: 0,
+    수U: 0,
+    수S: 0,
+    영U: 0,
+    영S: 0,
+    사U: 0,
+    사S: 0,
+    과U: 0,
+    과S: 0,
   });
   const [testScore3, setTestScore3] = useState({
-    국U: "",
-    국S: "",
-    수U: "",
-    수S: "",
-    영U: "",
-    영S: "",
-    사U: "",
-    사S: "",
-    과U: "",
-    과S: "",
+    국U: 0,
+    국S: 0,
+    수U: 0,
+    수S: 0,
+    영U: 0,
+    영S: 0,
+    사U: 0,
+    사S: 0,
+    과U: 0,
+    과S: 0,
   });
   const [testScore4, setTestScore4] = useState({
-    국U: "",
-    국S: "",
-    수U: "",
-    수S: "",
-    영U: "",
-    영S: "",
-    사U: "",
-    사S: "",
-    과U: "",
-    과S: "",
+    국U: 0,
+    국S: 0,
+    수U: 0,
+    수S: 0,
+    영U: 0,
+    영S: 0,
+    사U: 0,
+    사S: 0,
+    과U: 0,
+    과S: 0,
   });
   const [testScore5, setTestScore5] = useState({
-    국U: "",
-    국S: "",
-    수U: "",
-    수S: "",
-    영U: "",
-    영S: "",
-    사U: "",
-    사S: "",
-    과U: "",
-    과S: "",
+    국U: 0,
+    국S: 0,
+    수U: 0,
+    수S: 0,
+    영U: 0,
+    영S: 0,
+    사U: 0,
+    사S: 0,
+    과U: 0,
+    과S: 0,
   });
   const [testScore6, setTestScore6] = useState({
-    국U: "",
-    국S: "",
-    수U: "",
-    수S: "",
-    영U: "",
-    영S: "",
-    사U: "",
-    사S: "",
-    과U: "",
-    과S: "",
+    국U: 0,
+    국S: 0,
+    수U: 0,
+    수S: 0,
+    영U: 0,
+    영S: 0,
+    사U: 0,
+    사S: 0,
+    과U: 0,
+    과S: 0,
   });
   const navigate = useNavigate();
 
-  const url = "http://43.201.70.179:8000";
+  const url = "http://10.36.180.175:8000";
   const accentColor = `lightgreen`;
 
   useEffect(() => {
@@ -150,7 +150,11 @@ function Form({ setShowResult, setResult }: Props) {
   }, []);
 
   async function loadUniversityList() {
-    const res = await fetch(`${url}/selT/college-event`);
+    const res = await fetch(`${url}/selT/college-event`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     const data = await res.json();
     const test = data.reduce((acc: uniList, cur: CollegeObject) => {
       if (!acc.includes(cur.college)) {
@@ -178,12 +182,17 @@ function Form({ setShowResult, setResult }: Props) {
   };
 
   interface infoI {
-    name: "뚱이";
-    email: "pmb087@gmail.com";
-    is_male: true;
     admission_type: string;
-    avg_gpa: number;
-    college: {
+    testscore: [
+      {
+        subject: "국어";
+        grade: 1;
+        semester: 1;
+        unit: number;
+        score: number;
+      }
+    ];
+    college?: {
       college: string;
       major: string;
     };
@@ -191,29 +200,49 @@ function Form({ setShowResult, setResult }: Props) {
 
   function submitForm(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const { avgGpa, college, major } = e.target as typeof e.target & {
-      avgGpa: { value: number };
+    const { college, major } = e.target as typeof e.target & {
       college: { value: string };
       major: { value: string };
     };
 
-    let data: infoI = {
-      name: "뚱이",
-      email: "pmb087@gmail.com",
-      is_male: true,
-      admission_type: isSubject ? "교과" : "종합",
-      avg_gpa: Number(avgGpa.value),
-      college: {
-        college: college.value,
-        major: major.value,
-      },
-    };
+    let data: infoI =
+      college.value !== ""
+        ? {
+            admission_type: isSubject ? "교과" : "종합",
+            testscore: [
+              {
+                subject: "국어",
+                grade: 1,
+                semester: 1,
+                unit: Number(testScore1.국U),
+                score: Number(testScore1.국S),
+              },
+            ],
+            college: {
+              college: college.value,
+              major: major.value,
+            },
+          }
+        : {
+            admission_type: isSubject ? "교과" : "종합",
+            testscore: [
+              {
+                subject: "국어",
+                grade: 1,
+                semester: 1,
+                unit: Number(testScore1.국U),
+                score: Number(testScore1.국S),
+              },
+            ],
+          };
 
     const requestOptions: any = {
       method: "POST",
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY1NjM0ODE3LCJpYXQiOjE2NjU2Mjc2MTcsImp0aSI6ImM5NzI3MjNiZjQzNDRkOWJiYmM2YzgyMzgwMWMwYmMxIiwidXNlcl9pZCI6Mzl9.8l-T5SKovWpxQ4w_Gg9N859FlNLgtLRDxyqaJtkzsr4
+        `,
       },
       body: JSON.stringify(data),
     };
