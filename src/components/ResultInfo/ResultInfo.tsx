@@ -9,11 +9,12 @@ import "./ResultInfo.scss";
  * feedback은 해당 합격률을 기준으로 서버에서 전달해주는 첨언문구입니다.
  */
 interface Props {
+  name: string;
   collegePercentage: number;
   feedback: string;
 }
 
-function ResultInfo({ collegePercentage, feedback }: Props) {
+function ResultInfo({ collegePercentage, feedback, name }: Props) {
   /**
    * resultPercentage는 페이지 내의 합격률 게이지 rotate제어하는 State입니다.
    * 초기값 0에서 setTimeout을 통해서 Props의 collegePercentage를 할당받고 transition을 연출합니다.
@@ -36,7 +37,7 @@ function ResultInfo({ collegePercentage, feedback }: Props) {
         />
       </div>
       <div className="resultText">
-        <span>뚱이님의 합격가능성은</span>
+        <span>{name}님의 합격가능성은</span>
         <span>{resultPercentage.toFixed(2)}% 입니다</span>
         <span>{feedback}</span>
       </div>
