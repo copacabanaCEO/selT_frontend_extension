@@ -13,7 +13,7 @@ function Main() {
    * showResult는 자식 컴포넌트의 렌더링을 결정하는 State입니다.
    * result는 정보입력 페이지에서 formEvent를 통해서 호출된 API의 반환값이 저장되는 State입니다.
    */
-  const [showResult, setShowResult] = useState<boolean>(true);
+  const [showResult, setShowResult] = useState<boolean>(false);
   const [result, setResult] = useState<{
     예측결과: number;
     진단결과: { college: string; college_percentage: number; major: string };

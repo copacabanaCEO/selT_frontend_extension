@@ -11,14 +11,13 @@ interface Props {
     진단결과: { college: string; college_percentage: number; major: string };
     피드백: string;
   };
-  name: string;
 }
-function Result({ setShowResult, result, name }: Props) {
+function Result({ setShowResult, result }: Props) {
   const { 예측결과, 피드백, 진단결과 } = result;
   const navigate = useNavigate();
 
   const shareKakao = () => {
-    let link = `https://www.copacabana.co.kr/shared/${name}/${예측결과}/${피드백}`;
+    let link = `https://www.copacabana.co.kr/shared/${예측결과}/${피드백}`;
 
     window.Kakao.Link.createDefaultButton({
       container: "#kakao-link-btn",
@@ -57,7 +56,7 @@ function Result({ setShowResult, result, name }: Props) {
 
   return (
     <div className="result">
-      <ResultInfo name={name} collegePercentage={예측결과} feedback={피드백} />
+      <ResultInfo collegePercentage={예측결과} feedback={피드백} />
       <div className="resultButtonWrap">
         <Button className="resultButton" onClick={() => setShowResult(false)}>
           {" "}
