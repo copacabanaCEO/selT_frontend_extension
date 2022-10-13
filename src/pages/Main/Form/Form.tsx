@@ -185,6 +185,9 @@ function Form({ setShowResult, setResult }: Props) {
       });
   };
 
+  /**
+   * 합격률 조회시 호출되는 API의 Body애 담겨지는 객체의 타입입니다.
+   */
   interface infoI {
     admission_type: string;
     testscore: [
@@ -202,6 +205,10 @@ function Form({ setShowResult, setResult }: Props) {
     };
   }
 
+  /**
+   * FormEvent발생시 실행되는 함수입니다.
+   * 희망대학, 학과를 선택하지 않았을경우와 선택했을 경우가 존재합니다.
+   */
   function submitForm(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const { college, major } = e.target as typeof e.target & {
@@ -241,12 +248,11 @@ function Form({ setShowResult, setResult }: Props) {
           };
 
     const requestOptions: any = {
-      method: "POST",
+      method: "PUT",
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY1NjM0ODE3LCJpYXQiOjE2NjU2Mjc2MTcsImp0aSI6ImM5NzI3MjNiZjQzNDRkOWJiYmM2YzgyMzgwMWMwYmMxIiwidXNlcl9pZCI6Mzl9.8l-T5SKovWpxQ4w_Gg9N859FlNLgtLRDxyqaJtkzsr4
-        `,
+        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY1NjQyNTk1LCJpYXQiOjE2NjU2MzUzOTUsImp0aSI6ImQwMjYwNzM2NTRjMzQwYmQ4ZjE1MDE1NzFhM2Y2NjNhIiwidXNlcl9pZCI6NDB9.xpjz_aYlMU_oSr4oCPISbNyG9T8H6kEYKp8OqGsVjAo`,
       },
       body: JSON.stringify(data),
     };
@@ -262,6 +268,9 @@ function Form({ setShowResult, setResult }: Props) {
       });
   }
 
+  /**
+   * 내신 입력 모달을 display속성을 컨트롤하는 함수입니다.
+   */
   const onClickToggleModal = () => {
     setOpenModal((prev) => !prev);
   };

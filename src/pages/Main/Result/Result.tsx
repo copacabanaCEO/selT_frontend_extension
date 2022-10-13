@@ -4,6 +4,11 @@ import ResultInfo from "../../../components/ResultInfo/ResultInfo";
 import "./Result.scss";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * 부모 컴포넌트에서 Props로 전달받은 State입니다
+ * 다시하기 버튼을 클릭하면 setShowResult가 동작하여 Main Component에서 정보입력페이지로 리렌더링합니다.
+ * result는 API호출 결과로 응답받은 합격률관련 데이터를 저장한 State입니다.
+ */
 interface Props {
   setShowResult: Dispatch<SetStateAction<boolean>>;
   result: {

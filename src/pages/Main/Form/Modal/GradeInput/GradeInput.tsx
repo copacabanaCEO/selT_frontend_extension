@@ -1,6 +1,10 @@
 import React, { Dispatch, SetStateAction } from "react";
 import "./GradeInput.scss";
 
+/**
+ * 부모 컴포넌트에서 Props로 전달받은 State입니다
+ * 입력된 내신을 저장합니다.
+ */
 interface Props {
   click: boolean;
   testScore: {
@@ -32,6 +36,9 @@ interface Props {
 }
 
 function GradeInput({ click, testScore, setTestScore }: Props) {
+  /**
+   * 내려받은 Props에 현재 InputValue를 저장하는 onChange이벤트 함수입니다.
+   */
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.currentTarget;
     setTestScore({ ...testScore, [`${name}`]: value });

@@ -8,6 +8,10 @@ import GradeInput from "./GradeInput/GradeInput";
 import "./Modal.scss";
 import SideBar from "./SideBar/SideBar";
 
+/**
+ * 부모 컴포넌트에서 내려받은 Props입니다
+ * 내신 입력 관련 State입니다.
+ */
 interface Props {
   onClickToggleModal: () => void;
   testScore1: {
@@ -183,6 +187,9 @@ function Modal({
   testScore6,
   setTestScore6,
 }: PropsWithChildren<Props>) {
+  /**
+   * 현재 보고있는 내신입력 탭이 몇학년 몇학기인지 저장하는 State입니다
+   */
   const [click, setClick] = useState(1);
 
   return (

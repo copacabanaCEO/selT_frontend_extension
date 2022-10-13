@@ -1,6 +1,10 @@
 import React, { Dispatch, SetStateAction } from "react";
 import "./SideBar.scss";
 
+/**
+ * 부모 컴포넌트에서 Props로 전달받은 State입니다
+ * 현재 보고있는 탭이 몇학년 몇학기인지 set합니다.
+ */
 interface Props {
   click: number;
   setClick: Dispatch<SetStateAction<number>>;
